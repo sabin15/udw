@@ -126,15 +126,19 @@ function filterStudents(){
   console.log(unit_selected);
   if (unit_selected == 'it1110'){
     console.log("loading students from it1110");
+    $('#addstudents').show();
     $('#it1110').show();
     $('#it1113').hide();
     $('#bgmt4001').hide();
+    
+    
   }
   else if (unit_selected == 'it1113'){
     console.log("loading students from it1113");
     $('#it1110').hide();
     $('#it1113').show();
     $('#bgmt4001').hide();
+    $('#addstudents').show();
 
   }
   else{
@@ -142,6 +146,7 @@ function filterStudents(){
     $('#it1110').hide();
     $('#it1113').hide();
     $('#bgmt4001').show();
+    $('#addstudents').show();
 
   }
 }
@@ -293,4 +298,7 @@ function assign_staff_no(){
 }
 function assign_campus_semester(){
   swal("Assigned Successfully", "", "success");
+}
+function addStudenttoUnit(){
+  swal("Added Successfully", "", "success");
 }

@@ -174,6 +174,28 @@
     </table>
 </div>
 
+<div class="jumbotron" id="addstudents" style="display:none;">
+    <h2>Add Student to this unit</h2>
+    <br><br>
+    <div class="container student-filter">
+        <label class="control-label col-sm-2" for="select-unit">Select Student:</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-tasks"></span>
+                </div>
+                <select class="form-control" id="select-unit" name="unitId">
+                    <option disabled selected> -- Select a Student from the list -- </option>
+                    <option value="sabinshrestha">Sabin Shrestha</option>
+                    <option value="prashantpokhrel">Prashant Pokhrel</option>
+                    <option value="sarojkhanal">Saroj Khanal</option>
+                </select>
+            </div>
+            <br><br>
+            <button type="submit" class="btn btn-primary sweet-3" onclick="addStudenttoUnit()">Add Student</button>
+        </div>
+    </div>
+<div>
 
 
 <?php require('footer.php') ?>
