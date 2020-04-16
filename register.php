@@ -122,7 +122,7 @@
             <button class="btn btn-primary" onclick="load_staff_form()">Staff</button>
           </div>
         <p>Staff Form</p>
-        <form class="form-horizontal" action="/action_page.php">
+        <form class="form-horizontal" action="login.php">
           <div class="form-group">
             <label class="control-label col-sm-2" for="staff-id">Staff ID:</label>
             <div class="col-sm-10">

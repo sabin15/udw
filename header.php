@@ -40,8 +40,7 @@
                     <li><a href="register.php">Register</a></li>
                     <li><a href="enrollment.php">Enrollment</a></li>
                     <li><a href="unit-details.php">Unit Details</a></li>
-                    <li><a href="timetable.php">My Timetable</a></li>
-                    <li><a href="lecturer.php">Lecturer Page</a></li>
+                    <li><a href="timetable.php">My Timetable</a></li>                    
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">MasterList
                         <span class="caret"></span></a>
@@ -49,6 +48,14 @@
                         <li><a href="masterlist.php">Academic Staffs</a></li>
                         <li><a href="masterunits.php">Master Units</a></li>
                         <li><a href="masterlist-uc.php">Manage Staff</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Management
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                        <li><a href="lecturer.php">Lecturer</a></li>
+                        <li><a href="uc_management.php">UC</a></li>                        
                         </ul>
                     </li>
                     <li><a href="manage-timetable.php">Manage Timetable</a></li>
