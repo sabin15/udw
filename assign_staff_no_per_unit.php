@@ -10,9 +10,9 @@
                 <span class="glyphicon glyphicon-tasks"></span>
                </div>
                <select class="form-control" id="select-unit">
-                 <option value="it1110">IT1110 Python OOPS: Object Oriented Programming</option>
-                 <option value="it1113">IT1113 Software Engineering Analysis and Design</option>
-                 <option value="bgmt4001">BMGT 4001 Project Management</option>
+                 <option>IT1110 Python OOPS: Object Oriented Programming</option>
+                 <option>IT1113 Software Engineering Analysis and Design</option>
+                 <option>BMGT 4001 Project Management</option>
                </select>
              </div>
             </div>
