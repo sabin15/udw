@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 function load_student_form(){
   $('#staff-form').hide();
   $('#student-form').show();
@@ -147,7 +146,6 @@ function filterStudents(){
   }
 }
 
-=======
 function load_student_form(){
   $('#staff-form').hide();
   $('#student-form').show();
@@ -296,4 +294,3 @@ function assign_staff_no(){
 function assign_campus_semester(){
   swal("Assigned Successfully", "", "success");
 }
->>>>>>> 5b52427de29db2ac3ba3be035e5ae77260904766
