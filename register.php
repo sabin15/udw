@@ -1,4 +1,5 @@
 <?php require('header.php') ?>
+<?php include 'controller/user_register.php' ?>
 
 
 
@@ -13,7 +14,7 @@
           </div>
 
         <p>Student Form</p>
-        <form class="form-horizontal" action="login.php">
+        <form class="form-horizontal" method='post' action="" enctype="multipart/form-data">
           <div class="form-group">
             <label class="control-label col-sm-2" for="student-id">Student ID: *</label>
             <div class="col-sm-10">
@@ -21,7 +22,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
                </div>
-              <input type="text" class="form-control" id="student-id" placeholder="Please enter student ID" required>
+              <input type="text" class="form-control" id="student-id" name="user_id" placeholder="Please enter student ID" required>
             </div>
             </div>
           </div>
@@ -32,7 +33,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-user"></span>
                </div>
-              <input type="text" class="form-control" id="student-name" placeholder="Please enter Name" required>
+              <input type="text" class="form-control" id="student-name" name="name" placeholder="Please enter Name" required>
              </div>
             </div>
           </div>
@@ -43,7 +44,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-envelope"></span>
                </div>
-              <input type="email" class="form-control" id="student-email" placeholder="Please enter email" required>
+              <input type="email" class="form-control" id="student-email" name="email" placeholder="Please enter email" required>
              </div>
             </div>
           </div>
@@ -65,7 +66,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-lock"></span>
                </div>
-              <input type="password" class="form-control" id="confirm-student-pwd" placeholder="Confirm password" minlength="6" maxlength="12" required>
+              <input type="password" class="form-control" id="confirm-student-pwd" name="password" placeholder="Confirm password" minlength="6" maxlength="12" required>
             </div>
             </div>
           </div>
@@ -76,7 +77,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-home"></span>
                </div>
-              <input type="text" class="form-control" id="student-address" placeholder="Address">
+              <input type="text" class="form-control" id="student-address" name="address" placeholder="Address">
              </div>
             </div>
           </div>
@@ -88,7 +89,7 @@
              <div class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
              </div>
-             <input type="text" class="form-control" id="student-dob" name="student-dob" placeholder="MM/DD/YYYY" />
+             <input type="text" class="form-control" id="student-dob" name="dob" placeholder="MM/DD/YYYY" />
             </div>
            </div>
           </div>
@@ -100,7 +101,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-earphone"></span>
                </div>
-              <input type="number" class="form-control" id="student-phone" placeholder="Phone Number" maxlength="10">
+              <input type="number" class="form-control" id="student-phone" name="contact" placeholder="Phone Number" maxlength="10">
             </div>
             </div>
           </div>
@@ -122,7 +123,7 @@
             <button class="btn btn-primary" onclick="load_staff_form()">Staff</button>
           </div>
         <p>Staff Form</p>
-        <form class="form-horizontal" action="login.php">
+        <form class="form-horizontal" action="">
           <div class="form-group">
             <label class="control-label col-sm-2" for="staff-id">Staff ID:</label>
             <div class="col-sm-10">
