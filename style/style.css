@@ -98,3 +98,10 @@
 .staff_detail_box{
   border: 2px solid #dedfe0;
 }
+
+
+.nav-username{
+  float: right;
+  position: relative;
+  left: 50px;
+}

@@ -25,12 +25,13 @@
               $auth=password_verify($password, $user['password']);
               if ($auth) {
                   session_start();
-                  $_SESSION['id'] = $email;
-                  $_SESSION['success'] = "You are now logged in";
-                  if($_POST['redirect_url']=='')
-                      header('location: /udw/index.php');
+                  $_SESSION['username'] = $user['name'];
+                  $_SESSION['logged'] = true;
+                  echo true;
+                  //header("Location:/udw/index.php");
+                    
               } else {
-                  echo 'Wrong_password';
+                  echo false;
               }
           }
       }

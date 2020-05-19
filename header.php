@@ -1,14 +1,16 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
 <head>
   <title>CMS Solution</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>document.getElementsByTagName("html")[0].className += " js";</script>
-
+  
+  
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+  
+  <script>document.getElementsByTagName("html")[0].className += " js";</script>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
@@ -23,6 +25,7 @@
   <link rel="stylesheet" href="style/timetable.css">
   <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  
   <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min>-->
 <body>
     <div class= "container-fluid">
@@ -59,7 +62,31 @@
                         </ul>
                     </li>
                     <li><a href="manage-timetable.php">Manage Timetable</a></li>
+                    
+                </ul>         
+                <ul class="nav navbar-nav navbar-right">
+                    
+                   
+                        <?php 
+                            if($_SESSION['logged']==true)
+                            { 
+                                echo '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> '.$_SESSION["username"];
+                                echo '<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                <li><a href="controller/logout.php">Logout</a></li>                        
+                                </ul></li>';                                
+
+                            }
+                            elseif($_SESSION['logged']==false)
+                            {
+                                echo '<li><a href="register.php"><span class="glyphicon glyphicon-user"></span> Register</a></li>';
+                                echo '<li><a href="login.php"><span class="glyphicon glyphicon-log-in">Login</span>';
+                            }
+                        ?></a>
+                    </li>
                 </ul>
-                </div>
+                
+            </div>
             </nav>
+                
         </header>

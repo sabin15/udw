@@ -292,6 +292,12 @@ function edit_timetable(){
   $('#edit-timetable').show();
   document.getElementById('timetable-heading').innerHTML = "Timetable for " + selected_unit + " on "+ selected_semester;
   document.getElementById('campus-name').innerHTML = selected_campus;
+  document.getElementById('unit').value=selected_unit;
+  document.getElementById('semester').value=selected_semester;
+  document.getElementById('campus').value=selected_campus;
+  loadtable("lecture_table", "lecture",selected_unit, selected_campus, selected_semester);
+  loadtable("tutor_table", "tutorial",selected_unit, selected_campus, selected_semester);
+
 }
 
 function appoint_uc_lec(){
@@ -311,3 +317,5 @@ function addStudenttoUnit(){
 function addTutortoUnit(){
   swal("Added Successfully", "", "success");
 }
+
+
