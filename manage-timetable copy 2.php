@@ -35,65 +35,9 @@
 
 
 
-<div class="jumbotron-fluid">
-  <form class="form-horizontal" action="#">
-    <div class="form-group row">
-      <label class="control-label col-sm-2" for="select-unit">Select Unit:</label>
-      <div class="col-sm-10">
-        <div class="input-group">
-         <div class="input-group-addon">
-          <span class="glyphicon glyphicon-tasks"></span>
-         </div>
-         <select class="form-control" id="select-unit">
-         <?php
-            include ('controller/load_units.php');            
-          ?>
-           
-         </select>
-       </div>
-     </div>
-   </div>
 
-   <div class="form-group row">
-     <label class="control-label col-sm-2" for="select-campus">Select Campus</label>
-     <div class="col-sm-10">
-       <div class="input-group">
-        <div class="input-group-addon">
-         <span class="glyphicon glyphicon-tasks"></span>
-        </div>
-        <select class="form-control" id="select-campus">
-          <?php
-              include ('controller/load_campus.php');            
-            ?>
-        </select>
-      </div>
-    </div>
-  </div>
 
-   <div class="form-group row">
-     <label class="control-label col-sm-2" for="select-unit">Select Semester:</label>
-     <div class="col-sm-10">
-       <div class="input-group">
-        <div class="input-group-addon">
-         <span class="glyphicon glyphicon-tasks"></span>
-        </div>
-        <select class="form-control" id="select-semester">
-          <?php
-              include ('controller/load_semester.php');            
-          ?>
-        </select>
-      </div>
-
-       <div class="input-group">
-         <button class="btn btn-primary" onclick="edit_timetable()">Submit</button>
-       </div>
-
-      </div>
-    </div>
-  </form>
-</div>
-
-<div class="jumbotron-fluid" id="edit-timetable" style="display:none;">
+<div class="jumbotron-fluid" id="edit-timetable">
   <h3 id="timetable-heading"></h3>
   <div class="row">
     <div class="col-sm-4">
@@ -101,13 +45,58 @@
         <h3 id="campus-name"></h3>
 
         <form class="form-horizontal" method='post' action="" enctype="multipart/form-data" id="timetable-form">
-        <input type="text" id="unit" value="" name="unit" style="display:none;">
-        <input type="text" id="campus" value="" name="campus" style="display:none;">
-        <input type="text" id="semester" value="" name="semester" style="display:none;">
+          <div class="form-group row">
+            <label class="control-label col-sm-3" for="select-unit">Select Unit:</label>
+            <div class="col-sm-8">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <span class="glyphicon glyphicon-tasks"></span>
+                </div>
+                <select class="form-control" id="select-unit" name="unit">
+                  <?php
+                      include ('controller/load_units.php');            
+                    ?>
+                  
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="control-label col-sm-3" for="select-campus">Select Campus</label>
+            <div class="col-sm-8">
+              <div class="input-group">
+                <div class="input-group-addon">
+                <span class="glyphicon glyphicon-tasks"></span>
+                </div>
+                <select class="form-control" id="select-campus" name="campus">
+                  <?php
+                      include ('controller/load_campus.php');            
+                    ?>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="control-label col-sm-3" for="select-unit">Select Semester:</label>
+            <div class="col-sm-8">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <span class="glyphicon glyphicon-tasks"></span>
+                </div>
+                <select class="form-control" id="select-semester" name="semester">
+                  <?php
+                      include ('controller/load_semester.php');            
+                  ?>
+                </select>
+              </div>
+            </div>
+          </div>
+
 
           <div class="form-group">
-            <label class="control-label col-sm-2" for="select-unit">Select Type:</label>
-            <div class="col-sm-10">
+            <label class="control-label col-sm-3" for="select-unit">Select Type:</label>
+            <div class="col-sm-8">
               <div class="input-group">
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-tasks"></span>
@@ -121,8 +110,8 @@
           </div>
 
           <div class="form-group ">
-           <label class="control-label col-sm-2 requiredField" for="date">Start Date:</label>
-           <div class="col-sm-10">
+           <label class="control-label col-sm-3 requiredField" for="date">Start Date:</label>
+           <div class="col-sm-8">
             <div class="input-group">
              <div class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
@@ -133,8 +122,8 @@
           </div>
 
           <div class="form-group ">
-           <label class="control-label col-sm-2 requiredField" for="date">Start Time:</label>
-           <div class="col-sm-10">
+           <label class="control-label col-sm-3 requiredField" for="date">Start Time:</label>
+           <div class="col-sm-8">
             <div class="input-group">
              <div class="input-group-addon">
               <span class="glyphicon glyphicon-time"></span>
@@ -145,8 +134,8 @@
           </div>
 
           <div class="form-group ">
-           <label class="control-label col-sm-2 requiredField" for="date">End Date:</label>
-           <div class="col-sm-10">
+           <label class="control-label col-sm-3 requiredField" for="date">End Date:</label>
+           <div class="col-sm-8">
             <div class="input-group">
              <div class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
@@ -159,8 +148,8 @@
 
 
           <div class="form-group ">
-           <label class="control-label col-sm-2 requiredField" for="date">End Time:</label>
-           <div class="col-sm-10">
+           <label class="control-label col-sm-3 requiredField" for="date">End Time:</label>
+           <div class="col-sm-8">
             <div class="input-group">
              <div class="input-group-addon">
               <span class="glyphicon glyphicon-time"></span>
@@ -191,43 +180,74 @@
       </div>
     </div>
 
-    <div class="col-sm-8">
+    <div class="col-sm-6">
       <div class="jumbotron">
         <h3>Existing TimeTable</h3>
 
         <p>Lecture</p>
-        <table class="table table-hover" id="lecture_table">
+        <table class="table table-hover">
           <thead>
             <tr>
-              <th data-field="type">Type</th>
-              <th data-field="unit">Unit</th>
-              <th data-field="campus">Campus</th>
-              <th data-field="semester">Semester</th>
-              <th data-field="start_date">Start Date</th>
-              <th data-field="end_date">End Date</th>
-              <th data-field="start_time">Start Time</th>
-              <th data-field="end_time">End Time</th>
-              <th data-field="day">Day</th>
+              <th scope="col">#</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
+              <th scope="col">Start Time</th>
+              <th scope="col">End Time</th>
+              <th scope="col">Days</th>
             </tr>
           </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>11/11/2019</td>
+              <td>05/03/2020</td>
+              <td>11:00</td>
+              <td>15:00</td>
+              <td>Monday</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>11/11/2019</td>
+              <td>05/03/2020</td>
+              <td>11:00</td>
+              <td>15:00</td>
+              <td>Wednesday</td>
+            </tr>
+
+          </tbody>
         </table>
 
-
         <p>Tutor</p>
-        <table class="table table-hover" id="tutor_table">
+        <table class="table table-hover">
           <thead>
             <tr>
-              <th data-field="type">Type</th>
-              <th data-field="unit">Unit</th>
-              <th data-field="campus">Campus</th>
-              <th data-field="semester">Semester</th>
-              <th data-field="start_date">Start Date</th>
-              <th data-field="end_date">End Date</th>
-              <th data-field="start_time">Start Time</th>
-              <th data-field="end_time">End Time</th>
-              <th data-field="day">Day</th>
+              <th scope="col">#</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
+              <th scope="col">Start Time</th>
+              <th scope="col">End Time</th>
+              <th scope="col">Days</th>
             </tr>
           </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>11/11/2019</td>
+              <td>05/03/2020</td>
+              <td>11:00</td>
+              <td>15:00</td>
+              <td>Monday</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>11/11/2019</td>
+              <td>05/03/2020</td>
+              <td>11:00</td>
+              <td>15:00</td>
+              <td>Wednesday</td>
+            </tr>
+
+          </tbody>
         </table>
 
       </div>
@@ -239,21 +259,4 @@
 
 
 
-<script>
-  function loadtable(tablename, type, unit, campus, semester){
-    $('#' + tablename).bootstrapTable('destroy'); 
-    $.post( 
-        "/udw/controller/load_timetable.php",
-        {type, unit, campus, semester},
-        function(data) {
-          console.log(data);
-          $('#' + tablename).bootstrapTable({
-              data: data
-          });
-      },
-      "json"
-    );
-
-  }
-</script>
 <?php require('footer.php') ?>

@@ -10,20 +10,17 @@
   $(document).ready(function() {
   $('#timetable-form').submit(function(e) {
     e.preventDefault();
-    console.log($(this).serialize());
     $.ajax({
       type: "POST",
       url: '/udw/controller/manage_timetable.php',
       data: $(this).serialize(),
       success: function(data)
       {
-       
           if (data == true) {
-            alert("data added successsfully");
-            //window.location = 'index.php';
+            window.location = 'index.php';
           }
           else {
-            alert(data);
+            alert('Invalid Credentials');
             console.log(data);
           }
       }
@@ -36,7 +33,7 @@
 
 
 <div class="jumbotron-fluid">
-  <form class="form-horizontal" action="#">
+  <form class="form-horizontal">
     <div class="form-group row">
       <label class="control-label col-sm-2" for="select-unit">Select Unit:</label>
       <div class="col-sm-10">
@@ -96,14 +93,11 @@
 <div class="jumbotron-fluid" id="edit-timetable" style="display:none;">
   <h3 id="timetable-heading"></h3>
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-6">
       <div class="jumbotron">
         <h3 id="campus-name"></h3>
 
         <form class="form-horizontal" method='post' action="" enctype="multipart/form-data" id="timetable-form">
-        <input type="text" id="unit" value="" name="unit" style="display:none;">
-        <input type="text" id="campus" value="" name="campus" style="display:none;">
-        <input type="text" id="semester" value="" name="semester" style="display:none;">
 
           <div class="form-group">
             <label class="control-label col-sm-2" for="select-unit">Select Type:</label>
@@ -112,9 +106,9 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-tasks"></span>
                </div>
-               <select class="form-control" id="select-lec-tut" name="type">
-                 <option value="lecture">Lecture</option>
-                 <option value="tutorial">Tutorial</option>
+               <select class="form-control" id="select-lec-tut">
+                 <option name="type" value="lecture">Lecture</option>
+                 <option name="type" value="tutorial">Tutorial</option>
               </select>
              </div>
             </div>
@@ -139,7 +133,7 @@
              <div class="input-group-addon">
               <span class="glyphicon glyphicon-time"></span>
              </div>
-             <input type="text" class="form-control timepicker" id="sem-start-time" name="sem-start-time" />
+             <input type="text" class="form-control timepicker" id="sem-start-time" name="timepicker" />
             </div>
            </div>
           </div>
@@ -165,7 +159,7 @@
              <div class="input-group-addon">
               <span class="glyphicon glyphicon-time"></span>
              </div>
-             <input type="text" class="form-control timepicker" id="sem-end-time" name="sem-end-time" />
+             <input type="text" class="form-control timepicker" id="sem-end-time" name="timepicker" />
             </div>
            </div>
           </div>
@@ -173,17 +167,17 @@
           <div class="row">
               <div class="col-lg-2"></div>
 
-              <div class="col-lg-2"><label><input type="checkbox" name="day1" value="Monday">Mon</label></div>
-              <div class="col-lg-2"><label><input type="checkbox" name="day2" value="Tuesday">Tue</label></div>
-              <div class="col-lg-2"><label><input type="checkbox" name="day3" value="Wednesday">Wed</label></div>
-              <div class="col-lg-2"><label><input type="checkbox" name="day4" value="Thursday">Thu</label></div>
-              <div class="col-lg-2"><label><input type="checkbox" name="day5" value="Friday">Fri</label></div>
+              <div class="col-lg-2"><label><input type="checkbox" name="day" value="Monday">Mon</label></div>
+              <div class="col-lg-2"><label><input type="checkbox" name="day" value="Tuesday">Tue</label></div>
+              <div class="col-lg-2"><label><input type="checkbox" name="day" value="Wednesday">Wed</label></div>
+              <div class="col-lg-2"><label><input type="checkbox" name="day" value="Thursday">Thu</label></div>
+              <div class="col-lg-2"><label><input type="checkbox" name="day" value="Friday">Fri</label></div>
 
           </div>
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input type="submit" value="Create Timetable">
+                <input type="submit" class="btn btn-success" value="Create Timetable">
             </div>
           </div>
         </form>
@@ -191,43 +185,74 @@
       </div>
     </div>
 
-    <div class="col-sm-8">
+    <div class="col-sm-6">
       <div class="jumbotron">
         <h3>Existing TimeTable</h3>
 
         <p>Lecture</p>
-        <table class="table table-hover" id="lecture_table">
+        <table class="table table-hover">
           <thead>
             <tr>
-              <th data-field="type">Type</th>
-              <th data-field="unit">Unit</th>
-              <th data-field="campus">Campus</th>
-              <th data-field="semester">Semester</th>
-              <th data-field="start_date">Start Date</th>
-              <th data-field="end_date">End Date</th>
-              <th data-field="start_time">Start Time</th>
-              <th data-field="end_time">End Time</th>
-              <th data-field="day">Day</th>
+              <th scope="col">#</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
+              <th scope="col">Start Time</th>
+              <th scope="col">End Time</th>
+              <th scope="col">Days</th>
             </tr>
           </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>11/11/2019</td>
+              <td>05/03/2020</td>
+              <td>11:00</td>
+              <td>15:00</td>
+              <td>Monday</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>11/11/2019</td>
+              <td>05/03/2020</td>
+              <td>11:00</td>
+              <td>15:00</td>
+              <td>Wednesday</td>
+            </tr>
+
+          </tbody>
         </table>
 
-
         <p>Tutor</p>
-        <table class="table table-hover" id="tutor_table">
+        <table class="table table-hover">
           <thead>
             <tr>
-              <th data-field="type">Type</th>
-              <th data-field="unit">Unit</th>
-              <th data-field="campus">Campus</th>
-              <th data-field="semester">Semester</th>
-              <th data-field="start_date">Start Date</th>
-              <th data-field="end_date">End Date</th>
-              <th data-field="start_time">Start Time</th>
-              <th data-field="end_time">End Time</th>
-              <th data-field="day">Day</th>
+              <th scope="col">#</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
+              <th scope="col">Start Time</th>
+              <th scope="col">End Time</th>
+              <th scope="col">Days</th>
             </tr>
           </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>11/11/2019</td>
+              <td>05/03/2020</td>
+              <td>11:00</td>
+              <td>15:00</td>
+              <td>Monday</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>11/11/2019</td>
+              <td>05/03/2020</td>
+              <td>11:00</td>
+              <td>15:00</td>
+              <td>Wednesday</td>
+            </tr>
+
+          </tbody>
         </table>
 
       </div>
@@ -239,21 +264,4 @@
 
 
 
-<script>
-  function loadtable(tablename, type, unit, campus, semester){
-    $('#' + tablename).bootstrapTable('destroy'); 
-    $.post( 
-        "/udw/controller/load_timetable.php",
-        {type, unit, campus, semester},
-        function(data) {
-          console.log(data);
-          $('#' + tablename).bootstrapTable({
-              data: data
-          });
-      },
-      "json"
-    );
-
-  }
-</script>
 <?php require('footer.php') ?>
