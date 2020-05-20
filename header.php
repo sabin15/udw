@@ -1,4 +1,10 @@
-<?php session_start() ?>
+<?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start();         
+      
+    } 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +74,7 @@
                     
                    
                         <?php 
-                            if($_SESSION['logged']==true)
+                            if(isset($_SESSION['logged']) && $_SESSION['logged'])
                             { 
                                 echo '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> '.$_SESSION["username"];
                                 echo '<span class="caret"></span></a>
@@ -77,7 +83,7 @@
                                 </ul></li>';                                
 
                             }
-                            elseif($_SESSION['logged']==false)
+                            else
                             {
                                 echo '<li><a href="register.php"><span class="glyphicon glyphicon-user"></span> Register</a></li>';
                                 echo '<li><a href="login.php"><span class="glyphicon glyphicon-log-in">Login</span>';

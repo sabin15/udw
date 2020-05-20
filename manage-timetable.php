@@ -20,6 +20,8 @@
        
           if (data == true) {
             alert("data added successsfully");
+            edit_timetable();
+
             //window.location = 'index.php';
           }
           else {

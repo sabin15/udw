@@ -1,8 +1,12 @@
 <?php
-  session_start();
-  if($_SESSION['logged']==true){
-    header("Location:/udw/index.php");
-  }
+  if(!isset($_SESSION)) 
+  { 
+      session_start(); 
+      if(isset($_SESSION['logged']) && $_SESSION['logged']){
+        header("Location:/udw/index.php");
+      }
+  } 
+  
 ?>
 <?php require('header.php') ?>
 <?php include 'controller/login.php' ?>
