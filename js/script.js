@@ -32,10 +32,7 @@ function enroll_function(){
   swal("Enrolled Successfully", "", "success");
 }
 
-function appoint_lecturer_tutor(){
-  //alert("Hello");
-  swal("Appointed Successfully", "", "success");
-}
+
 
 function lecture_timetable(){
   $('#tutorial-timetable').hide();
@@ -205,7 +202,26 @@ function enroll_function(){
 
 function appoint_lecturer_tutor(){
   
-  swal("Appointed Successfully", "", "success");
+  var campus = $("#select-campus").val();
+  var sem = $("#select-sem").val();
+  var unit = $("#uc-select-unit").val();
+  var staff = $("#uc-select-staff").val();
+  var position = $("#select-position").val();
+  //alert(campus+sem+unit+staff+position);
+  $.ajax({
+    url:"controller/backend.php",
+    type:"POST",
+    data: {campus:campus, sem:sem, unit:unit, staff:staff, position:position},
+    success: function(data, status){
+        alert(data);
+        console.log(data);
+        //location.reload();
+    }
+
+  });
+
+  
+  //swal("Appointed Successfully", "", "success");
 }
 
 function lecture_timetable(){

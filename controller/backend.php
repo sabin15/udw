@@ -1,6 +1,6 @@
 <?php 
 require_once("db_connect.php");
-
+//add unit
 if(isset($_POST['unit_code']) && isset($_POST['unit_name']) && isset($_POST['unit_description'])){
     $unit_code = $_POST['unit_code'];
     $unit_name = $_POST['unit_name'];
@@ -125,5 +125,45 @@ if(isset($_POST['unit_code']) && isset($_POST['unit_name']) && isset($_POST['uni
         echo "Not successful";
     }
   }
+
+  //staffs for selected unit
+  if(isset($_POST['unit_code'])){
+    $unit_code = $_POST['unit_code'];
+    $staff_for_units = array();  
+    $query = "SELECT DISTINCT a.staff_id, s.name FROM appoint_staff a, staff s where a.staff_id = s.id and a.unit_code='$unit_code'";
+    $result = mysqli_query($conn, $query);
+
+        if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+            while($row = $result->fetch_assoc()) {                      
+                $staff_id = $row['staff_id'];
+                $staff_name = $row['name'];                                                                        
+                $staff_for_units[$staff_id] = $staff_name;
+            }
+        }
+    echo json_encode($staff_for_units);
+  }
+
+  //appoint lecturer/tutor by uc
+  if(isset($_POST['campus']) && isset($_POST['sem']) && isset($_POST['unit']) && isset($_POST['staff']) && isset($_POST['position'])){
+      $campus = $_POST['campus'];
+      $sem = $_POST['sem'];
+      $unit_code = $_POST['unit'];
+      $staff_id = $_POST['staff'];
+      $position = $_POST['position'];
+
+    //echo $campus." ".$sem." ".$unit_code." ".$staff_id. " ".$position;
+    
+    $query = "INSERT INTO `ucs` (`id`, `unit_code`, `campus_id`, `semester`, `timetable_id`, `staff_id`, `position`) VALUES (NULL, '$unit_code', '$campus', '$sem', NULL, '$staff_id', '$position');";
+    if(mysqli_query($conn, $query)){
+        echo "Successfully appointed as ". $position. " for ". $unit_code;
+    }
+    else{
+        echo "Not successful";//$conn -> error;
+    }
+  }
+  
+                
+                
 
 ?>
