@@ -16,6 +16,7 @@ if(isset($_POST['unit_code']) && isset($_POST['unit_name']) && isset($_POST['uni
     }
   }
 
+//assign available units to different semesters and campuses
   if(isset($_POST['unit_code']) && isset($_POST['pan_sem_1'])){
     $unit_code = $_POST['unit_code'];
     $pan_sem_1  = $_POST['pan_sem_1'];
@@ -91,6 +92,38 @@ if(isset($_POST['unit_code']) && isset($_POST['unit_name']) && isset($_POST['uni
     }
 
     
+  }
+
+  //appoint maximum number of staff per unit
+  if(isset($_POST['unit_selected']) && isset($_POST['max_staff'])){
+    $unit_selected = $_POST['unit_selected'];
+    $max_staff = $_POST['max_staff'];    
+    //echo $unit_selected . $max_staff;
+    
+    $query = "UPDATE `unit` SET `max_staff` = '$max_staff' WHERE `unit`.`code` = '$unit_selected';";
+    if(mysqli_query($conn, $query)){
+        echo "added";
+    }
+    else{
+        echo "not added";
+    }
+  }
+
+  //appoint uc/lecturer
+  if(isset($_POST['app_unit_selected']) && isset($_POST['staff_id']) && isset($_POST['position'])){
+    $unit_selected = $_POST['app_unit_selected'];
+    $staff_id = $_POST['staff_id'];
+    $position = $_POST['position'];
+
+    //echo $unit_selected . $max_staff;
+    
+    $query = "INSERT INTO `appoint_staff` (`id`, `unit_code`, `staff_id`, `position`) VALUES (NULL, '$unit_selected', '$staff_id', '$position');";
+    if(mysqli_query($conn, $query)){
+        echo "Successfully Appointed as ".$position."  for ". $unit_selected. " unit";
+    }
+    else{
+        echo "Not successful";
+    }
   }
 
 ?>
