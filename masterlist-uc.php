@@ -1,4 +1,7 @@
 <?php require('header.php') ?>
+<?php require('controller/db_connect.php')?>
+<?php require('controller/backend.php')?>
+
 
         <div class="jumbotron">
           <button class="btn btn-primary" onclick="appoint_lecturer_form()">Appoint Lecturer</button>
@@ -7,7 +10,7 @@
 
         <div class="jumbotron" id="appoint-lecturer-form">
           <h2>Appoint lecturer Form</h2>
-          <form class="form-horizontal" action="#">
+        <form class="form-horizontal">
           <div class="form-group">
             <label class="control-label col-sm-2" for="select-campus">Select Campus:</label>
             <div class="col-sm-10">
@@ -16,9 +19,21 @@
                 <span class="glyphicon glyphicon-home"></span>
                </div>
                <select class="form-control" id="select-campus">
-                 <option>Pandera</option>
-                 <option>Rivendell</option>
-                 <option>Neverland</option>
+                <?php
+
+                  $sql = "SELECT * FROM campus;";
+                  $result = mysqli_query($conn, $sql);
+
+                  if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {                      
+                      $id = $row['id'];
+                      $name = $row['name'];                                                        
+                      echo "<option value='$id'>".$name."</option>";
+                    }
+                  } 
+
+                  ?>
                </select>
              </div>
             </div>
@@ -32,42 +47,83 @@
                 <span class="glyphicon glyphicon-tasks"></span>
                </div>
                <select class="form-control" id="select-sem">
-                 <option>Semester 1</option>
-                 <option>Semester 2</option>
-                 <option>Winter</option>
-                 <option>Spring</option>
+                <?php
+
+                  $sql = "SELECT * FROM semester;";
+                  $result = mysqli_query($conn, $sql);
+
+                  if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {                      
+                      $id = $row['id'];
+                      $name = $row['name'];                                                        
+                      echo "<option value='$id'>".$name."</option>";
+                    }
+                  } 
+
+                  ?>
                </select>
              </div>
             </div>
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2" for="select-unit">Select Unit:</label>
+            <label class="control-label col-sm-2" for="uc-select-unit">Select Unit:</label>
             <div class="col-sm-10">
               <div class="input-group">
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-tasks"></span>
                </div>
-               <select class="form-control" id="select-unit">
-                 <option>IT1110 Python OOPS: Object Oriented Programming</option>
-                 <option>IT1113 Software Engineering Analysis and Design</option>
-                 <option>BMGT 4001 Project Management</option>
+               
+               <select class="form-control" id="uc-select-unit">
+                
+                  <?php
+
+                    $sql = "SELECT * FROM unit;";
+                    $result = mysqli_query($conn, $sql);
+
+                    if (mysqli_num_rows($result) > 0) {
+                      // output data of each row
+                      while($row = $result->fetch_assoc()) {                      
+                        $unit_code = $row['code'];
+                        $unit_name = $row['name'];                                                        
+                        $option_value = $unit_code . " " . $unit_name;
+                        echo "<option value='$unit_code'>".$option_value."</option>";
+                      }
+                    } 
+
+                  ?>
+                 
                </select>
              </div>
             </div>
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2" for="select-staff">Select Staff:</label>
+            <label class="control-label col-sm-2" for="uc-select-staff">Select Staff:</label>
             <div class="col-sm-10">
               <div class="input-group">
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-tasks"></span>
                </div>
-               <select class="form-control" id="select-staff">
-                 <option>11224 Sabin Shrestha</option>
-                 <option>11225 Prashant Pokhrel</option>
-                 <option>11226 Max Well</option>
+               <select class="form-control" id="uc-select-staff">
+                <option disabled selected>Select Staff</option>
+                <?php
+
+                  // $sql = "SELECT DISTINCT a.staff_id, s.name FROM appoint_staff a, staff s where a.staff_id = s.id;";
+                  // $result = mysqli_query($conn, $sql);
+
+                  // if (mysqli_num_rows($result) > 0) {
+                  //   // output data of each row
+                  //   while($row = $result->fetch_assoc()) {                      
+                  //     $staff_id = $row['staff_id'];
+                  //     $name = $row['name'];                                                        
+                  //     echo "<option value='$id'>".$name."</option>";
+                  //   }
+                  // } 
+
+                  ?> 
+                 
                </select>
              </div>
             </div>
@@ -81,8 +137,8 @@
                 <span class="glyphicon glyphicon-tasks"></span>
                </div>
                <select class="form-control" id="select-position">
-                 <option>Lecturer</option>
-                 <option>Tutor</option>
+                 <option value="lecturer">Lecturer</option>
+                 <option value="tutor">Tutor</option>
                </select>
              </div>
             </div>
@@ -217,5 +273,37 @@
           </div>
         </div>
 
+<script>
+$( "#uc-select-unit" ).change(function() {
+  $("#uc-select-staff").empty();
+  $("#uc-select-staff").append("<option disabled selected>Select Staff</option>");
+  var unit_code =  $( "#uc-select-unit" ).val();
+  $.ajax({
+    url:"controller/backend.php",
+    type:"POST",
+    data: {unit_code:unit_code},
+    success: function(data, status){
+      //alert(data);
+      //console.log(data);      
+      var staffs_for_selected_units = JSON.parse(data);      
+      for (var staff_id in staffs_for_selected_units){
+        console.log( staff_id, staffs_for_selected_units[staff_id] );
+        var staff_name = staffs_for_selected_units[staff_id];
+        $("#uc-select-staff").append("<option value='"+staff_id+"'>"+ staff_name +"</option>")
+      }
+        
+    }
+
+  });
+});
+
+
+//checking method
+$("#uc-select-staff").change(function() {
+  console.log($("#uc-select-staff").val());
+});
+
+
+</script>
 
 <?php require('footer.php') ?>
