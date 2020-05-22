@@ -1,10 +1,15 @@
+<?php
+  if(!isset($_SESSION)) 
+  { 
+      session_start(); 
+      if(isset($_SESSION['logged']) && $_SESSION['logged']){
+        header("Location:/udw/index.php");
+      }
+  } 
+  
+?>
 <?php require('header.php') ?>
-<?php include 'controller/user_register.php' ?>
-
-
-
-
-    <!--Student Form-->
+<!--Student Form-->
     <div class="container" id="student-form">
       <div class="jumbotron col-sm-8">
 
@@ -14,7 +19,7 @@
           </div>
 
         <p>Student Form</p>
-        <form class="form-horizontal" method='post' action="" enctype="multipart/form-data">
+        <form class="form-horizontal" method='post' action="" enctype="multipart/form-data" id="student_form">
           <div class="form-group">
             <label class="control-label col-sm-2" for="student-id">Student ID: *</label>
             <div class="col-sm-10">
@@ -107,7 +112,8 @@
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-success">Register  <span class="glyphicon glyphicon-arrow-right"></span></button>
+            <input type="submit" value="Register">
+                <!--<button type="submit" class="btn btn-success">Register  <span class="glyphicon glyphicon-arrow-right"></span></button> -->
             </div>
           </div>
         </form>
@@ -123,7 +129,7 @@
             <button class="btn btn-primary" onclick="load_staff_form()">Staff</button>
           </div>
         <p>Staff Form</p>
-        <form class="form-horizontal" action="">
+        <form class="form-horizontal" method='post' action="" enctype="multipart/form-data" id="staff_form">
           <div class="form-group">
             <label class="control-label col-sm-2" for="staff-id">Staff ID:</label>
             <div class="col-sm-10">
@@ -131,7 +137,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
                </div>
-              <input type="text" class="form-control" id="staff-id" placeholder="Please enter staff ID" required>
+              <input type="text" class="form-control" id="staff-id" name="staff_id" placeholder="Please enter staff ID" required>
               </div>
             </div>
           </div>
@@ -142,7 +148,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-user"></span>
                </div>
-              <input type="text" class="form-control" id="staff-name" placeholder="Please enter Name" required>
+              <input type="text" class="form-control" id="staff-name" name="staff_name" placeholder="Please enter Name" required>
               </div>
             </div>
           </div>
@@ -153,7 +159,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-envelope"></span>
                </div>
-              <input type="email" class="form-control" id="staff-email" placeholder="Please enter email" required>
+              <input type="email" class="form-control" id="staff-email" name="staff_email" placeholder="Please enter email" required>
               </div>
             </div>
           </div>
@@ -164,7 +170,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-lock"></span>
                </div>
-              <input type="password" class="form-control" id="staff-pwd" placeholder="Enter password" minlength="6" maxlength="12" required>
+              <input type="password" class="form-control" id="staff-pwd" name="staff_password" placeholder="Enter password" minlength="6" maxlength="12" required>
               </div>
             </div>
           </div>
@@ -175,7 +181,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-lock"></span>
                </div>
-              <input type="password" class="form-control" id="confirm-staff-pwd" placeholder="Confirm password" minlength="6" maxlength="12" required>
+              <input type="password" class="form-control" id="confirm-staff-pwd" name="staff_password" placeholder="Confirm password" minlength="6" maxlength="12" required>
               </div>
             </div>
           </div>
@@ -186,7 +192,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-home"></span>
                </div>
-              <input type="text" class="form-control" id="staff-address" placeholder="Please enter address">
+              <input type="text" class="form-control" id="staff-address" name="staff_address" placeholder="Please enter address">
               </div>
             </div>
           </div>
@@ -197,7 +203,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-education"></span>
                </div>
-              <input type="text" class="form-control" id="staff-qualification" placeholder="PhD, Masters, Bachelors...">
+              <input type="text" class="form-control" id="staff-qualification" name="staff_qualification" placeholder="PhD, Masters, Bachelors...">
               </div>
             </div>
           </div>
@@ -208,7 +214,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-king"></span>
                </div>
-              <input type="text" class="form-control" id="staff-expertise" placeholder="Information Systems, Human Computer Interaction, Network System...">
+              <input type="text" class="form-control" id="staff-expertise" name="staff_expertise" placeholder="Information Systems, Human Computer Interaction, Network System...">
               </div>
             </div>
           </div>
@@ -219,18 +225,73 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-earphone"></span>
                </div>
-              <input type="number" class="form-control" id="staff-phone" placeholder="Phone Number" maxlength="10">
+              <input type="number" class="form-control" id="staff-phone" name="staff_contact" placeholder="Phone Number" maxlength="10">
              </div>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-success">Register <span class="glyphicon glyphicon-arrow-right"></span></button>
+              <input type="submit" value="Register">
+              <!-- <button type="submit" class="btn btn-success">Register <span class="glyphicon glyphicon-arrow-right"></span></button> -->
             </div>
           </div>
         </form>
       </div>
     </div>
     <!--Close Staff Form-->
+
+<script>
+  $(document).ready(function() {
+  $('#staff_form').submit(function(e) {
+    e.preventDefault();
+    console.log($(this).serialize());
+    $.ajax({
+      type: "POST",
+      url: '/udw/controller/staff_register.php',
+      data: $(this).serialize(),
+      success: function(data)
+      {
+       
+          if (data == true) {
+            alert("data added successsfully");
+            window.location = '/udw/login.php';
+          }
+          else {
+            alert(data);
+            console.log(data);
+          }
+      }
+  });
+});
+});
+  
+</script>
+
+<script>
+  $(document).ready(function() {
+  $('#student_form').submit(function(e) {
+    e.preventDefault();
+    console.log($(this).serialize());
+    $.ajax({
+      type: "POST",
+      url: '/udw/controller/student_register.php',
+      data: $(this).serialize(),
+      success: function(data)
+      {
+       
+          if (data == true) {
+            alert("data added successsfully");
+            window.location = '/udw/login.php';
+          }
+          else {
+            alert(data);
+            console.log(data);
+          }
+      }
+  });
+});
+});
+  
+</script>
 
 <?php require('footer.php') ?>

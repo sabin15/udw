@@ -7,7 +7,7 @@
       $password=mysqli_escape_string($conn,$_POST['password']);
       $type=mysqli_escape_string($conn,$_POST['type']);
       $user_check_query='';
-
+      
       if($type=='student'){
         $user_check_query = "SELECT * FROM student WHERE email='$email'  LIMIT 1";
       }
@@ -27,6 +27,7 @@
                   session_start();
                   $_SESSION['username'] = $user['name'];
                   $_SESSION['logged'] = true;
+                  $_SESSION['type']=$type;
                   echo true;
                   //header("Location:/udw/index.php");
                     
