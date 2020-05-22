@@ -76,7 +76,7 @@
                         <?php 
                             if(isset($_SESSION['logged']) && $_SESSION['logged'])
                             { 
-                                echo '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> '.$_SESSION["username"];
+                                echo '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> '.$_SESSION["username"].' ['.$_SESSION["type"].']';
                                 echo '<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                 <li><a href="controller/logout.php">Logout</a></li>                        
