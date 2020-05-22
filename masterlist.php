@@ -1,4 +1,6 @@
 <?php require('header.php') ?>
+<?php require('controller/db_connect.php')?>
+
 
         <div class="jumbotron">
             <h2>Assign number of Staffs per Unit</h2>
@@ -26,129 +28,62 @@
         </div>
 
         <div class="row staff-details">
-            <div class="col-lg-3 staff_detail_box">
-                <img src="images/1.jpg" alt="Sabin Shrestha" width="100%">
-                <table class="table table-striped table-hover">
-                    <tbody>
-                        <tr>
-                            <td>Name: </td>
-                            <td>Sabin Shrestha</td>
-                        </tr>
-                        <tr>
-                            <td>Qualification: </td>
-                            <td>Masters in CyberSecurity</td>
-                        </tr>
-                        <tr>
-                            <td>Preferred Days of Teaching: </td>
-                            <td>Mon, Wed, Friday</td>
-                        </tr>
-                        <tr>
-                            <td>Consultation Hours: </td>
-                            <td>
-                                <table class="table ">
-                                <tr><td>Mon [10:00 - 11:30]</td></tr>
-                                <tr><td>Wed [11:00 - 13:30]</td></tr>
-                                <tr><td>Wed [11:00 - 13:30]</td></tr>
-                                </table>
-                            </td>
-                        </tr>
+            
+                <?php
+                    $sql = "SELECT * FROM `staff` WHERE `type` = 'lecturer' OR `type` = 'tutor';";
+                    $result = mysqli_query($conn, $sql);
 
-                    </tbody>
-            </table>
+                    if (mysqli_num_rows($result) > 0) {
+                      // output data of each row
+                      while($row = $result->fetch_assoc()) {
+                               
+                        $id = $row['id'];
+                        $staff_name = $row['name'];
+                        $qualification = $row['qualification'];
+                        $expertise = $row['expertise'];
+                        ?>
 
-            </div>
-            <div class="col-lg-3 staff_detail_box">
-                <img src="images/2.jpg" alt="Sabin Shrestha" width="100%">
-                <table class="table table-striped table-hover">
-                    <tbody>
-                        <tr>
-                            <td>Name: </td>
-                            <td>Prashant Pokhrel</td>
-                        </tr>
-                        <tr>
-                            <td>Qualification: </td>
-                            <td>Phd in Data Science</td>
-                        </tr>
-                        <tr>
-                            <td>Preferred Days of Teaching: </td>
-                            <td>Tue, Wed, Thu</td>
-                        </tr>
-                        <tr>
-                            <td>Consultation Hours: </td>
-                            <td>
-                                <table class="table ">
-                                <tr><td>Mon [10:00 - 11:30]</td></tr>
-                                <tr><td>Wed [11:00 - 13:30]</td></tr>
-                                <tr><td>Wed [11:00 - 13:30]</td></tr>
-                                </table>
-                            </td>
-                        </tr>
+                        <div class="col-lg-3 staff_detail_box">
+                            <img src="images/<?php echo "$id"?>.jpg" alt="<?php echo $staff_name?>" width="100%">
+                            
+                            <table class="table table-striped table-hover">
+                                <tbody>
+                                    <tr>
+                                        <td>Name: </td>
+                                        <td><?php echo $staff_name?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Qualification: </td>
+                                        <td><?php echo $qualification?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Expertise: </td>
+                                        <td><?php echo $expertise?></td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td>Preferred Days of Teaching: </td>
+                                        <td>Mon, Wed, Friday</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Consultation Hours: </td>
+                                        <td>
+                                            <table class="table ">
+                                            <tr><td>Mon [10:00 - 11:30]</td></tr>
+                                            <tr><td>Wed [11:00 - 13:30]</td></tr>
+                                            <tr><td>Wed [11:00 - 13:30]</td></tr>
+                                            </table>
+                                        </td>
+                                    </tr> -->
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <?php                        
                         
-                    </tbody>
-                </table>
+                      }
+                    } 
 
-            </div>
-            <div class="col-lg-3 staff_detail_box">
-                <img src="images/3.jpg" alt="Sabin Shrestha" width="100%">
-                <table class="table table-striped table-hover">
-                    <tbody>
-                        <tr>
-                            <td>Name: </td>
-                            <td>David Bombal</td>
-                        </tr>
-                        <tr>
-                            <td>Qualification: </td>
-                            <td>Masters in Networking</td>
-                        </tr>
-                        <tr>
-                            <td>Preferred Days of Teaching: </td>
-                            <td>Mon, Tue, Fri</td>
-                        </tr>
-                        <tr>
-                            <td>Consultation Hours: </td>
-                            <td>
-                                <table class="table ">
-                                <tr><td>Mon [10:00 - 11:30]</td></tr>
-                                <tr><td>Wed [11:00 - 13:30]</td></tr>
-                                <tr><td>Wed [11:00 - 13:30]</td></tr>
-                                </table>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="col-lg-3 staff_detail_box">
-                <img src="images/4.jpg" alt="Sabin Shrestha" width="100%">
-                <table class="table table-striped table-hover">
-                    <tbody>
-                        <tr>
-                            <td>Name: </td>
-                            <td>Alex Smith</td>
-                        </tr>
-                        <tr>
-                            <td>Qualification: </td>
-                            <td>Masters in Data Security</td>
-                        </tr>
-                        <tr>
-                            <td>Preferred Days of Teaching: </td>
-                            <td>Thu, Fri</td>
-                        </tr>
-                        <tr>
-                            <td>Consultation Hours: </td>
-                            <td>
-                                <table class="table ">
-                                <tr><td>Mon [10:00 - 11:30]</td></tr>
-                                <tr><td>Wed [11:00 - 13:30]</td></tr>
-                                <tr><td>Wed [11:00 - 13:30]</td></tr>
-                                </table>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
+                ?>
 
 
         </div>

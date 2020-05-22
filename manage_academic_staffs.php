@@ -19,8 +19,8 @@
                   <label class="col-sm-2 col-form-label">Position</label>
                   <div class="col-sm-5">
                     <select class="form-control" id="staff_position">
-                     <option>Lecturer</option>
-                     <option>Tutor</option>
+                     <option value="lecturer">Lecturer</option>
+                     <option value="tutor">Tutor</option>
                    </select>
                   </div>
                 </div>
@@ -29,9 +29,9 @@
                   <label class="col-sm-2 col-form-label">Campus</label>
                   <div class="col-sm-5">
                     <select class="form-control" id="select_campus">
-                     <option>Pandera</option>
-                     <option>Rivendell</option>
-                     <option>Neverland</option>
+                     <option value="1">Pandera</option>
+                     <option value="2">Rivendell</option>
+                     <option value="3">Neverland</option>
                    </select>
                 </div>
                 <div class="form-group row">

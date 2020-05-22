@@ -32,10 +32,7 @@ function enroll_function(){
   swal("Enrolled Successfully", "", "success");
 }
 
-function appoint_lecturer_tutor(){
-  //alert("Hello");
-  swal("Appointed Successfully", "", "success");
-}
+
 
 function lecture_timetable(){
   $('#tutorial-timetable').hide();
@@ -110,12 +107,8 @@ function enable_semester(ID){
 }
 
 // additional
-function appoint_uc_lec(){
-  swal("Appointed Successfully", "", "success");
-}
-function assign_staff_no(){
-  swal("Appointed Successfully", "", "success");
-}
+
+
 function assign_campus_semester(){
   swal("Assigned Successfully", "", "success");
 }
@@ -132,8 +125,7 @@ function filterStudents(){
     $('#it1110-tut').show();
     $('#it1113').hide();
     $('#bgmt4001').hide();
-    
-    
+        
   }
   else if (unit_selected == 'it1113'){
     console.log("loading students from it1113");
@@ -209,8 +201,27 @@ function enroll_function(){
 }
 
 function appoint_lecturer_tutor(){
-  //alert("Hello");
-  swal("Appointed Successfully", "", "success");
+  
+  var campus = $("#select-campus").val();
+  var sem = $("#select-sem").val();
+  var unit = $("#uc-select-unit").val();
+  var staff = $("#uc-select-staff").val();
+  var position = $("#select-position").val();
+  //alert(campus+sem+unit+staff+position);
+  $.ajax({
+    url:"controller/backend.php",
+    type:"POST",
+    data: {campus:campus, sem:sem, unit:unit, staff:staff, position:position},
+    success: function(data, status){
+        alert(data);
+        console.log(data);
+        //location.reload();
+    }
+
+  });
+
+  
+  //swal("Appointed Successfully", "", "success");
 }
 
 function lecture_timetable(){
@@ -301,10 +312,41 @@ function edit_timetable(){
 }
 
 function appoint_uc_lec(){
-  swal("Appointed Successfully", "", "success");
+  app_unit_selected = document.getElementById("app-select-unit").value;
+  staff_id = document.getElementById("app-select-staff").value;
+  position = document.getElementById("app-select-position").value;
+  //alert(unit_selected+" "+staff_id+position);
+  $.ajax({
+    url:"controller/backend.php",
+    type:"POST",
+    data: {app_unit_selected:app_unit_selected, staff_id:staff_id, position:position},
+    success: function(data, status){
+        alert(data);
+        console.log(data);
+        //location.reload();
+    }
+
+  });
+  //swal("Appointed Successfully", "", "success");
 }
+
 function assign_staff_no(){
-  swal("Appointed Successfully", "", "success");
+  unit_selected = document.getElementById("select-unit").value;
+  max_staff = document.getElementById("select-staff").value;
+
+  $.ajax({
+    url:"controller/backend.php",
+    type:"POST",
+    data: {unit_selected:unit_selected, max_staff:max_staff},
+    success: function(data, status){
+        alert(data);
+        console.log(data);
+        //location.reload();
+    }
+
+  });
+  //alert(unit_selected+max_staff);
+  //swal("Appointed Successfully", "", "success");
 }
 function assign_campus_semester(){
   swal("Assigned Successfully", "", "success");

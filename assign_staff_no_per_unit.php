@@ -10,9 +10,25 @@
                 <span class="glyphicon glyphicon-tasks"></span>
                </div>
                <select class="form-control" id="select-unit">
-                 <option>IT1110 Python OOPS: Object Oriented Programming</option>
+                <?php
+
+                    $sql = "SELECT * FROM unit;";
+                    $result = mysqli_query($conn, $sql);
+
+                    if (mysqli_num_rows($result) > 0) {
+                      // output data of each row
+                      while($row = $result->fetch_assoc()) {                      
+                        $unit_code = $row['code'];
+                        $unit_name = $row['name'];                                                        
+                        $option_value = $unit_code . " " . $unit_name;
+                         echo "<option value='$unit_code'>".$option_value."</option>";
+                      }
+                    } 
+                    
+                ?>
+                 <!-- <option>IT1110 Python OOPS: Object Oriented Programming</option>
                  <option>IT1113 Software Engineering Analysis and Design</option>
-                 <option>BMGT 4001 Project Management</option>
+                 <option>BMGT 4001 Project Management</option> -->
                </select>
              </div>
             </div>
@@ -26,6 +42,7 @@
                 <span class="glyphicon glyphicon-tasks"></span>
                </div>
                <select class="form-control" id="select-staff">
+               
                  <option>2</option>
                  <option>3</option>
                  <option>4</option>
