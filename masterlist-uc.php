@@ -1,3 +1,13 @@
+<?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start();
+        if(!isset($_SESSION['type']) || $_SESSION['type']!='uc'){
+          header("Location:/udw/index.php");
+        }         
+      
+    } 
+?>
 <?php require('header.php') ?>
 <?php require('controller/db_connect.php')?>
 <?php require('controller/backend.php')?>
@@ -11,63 +21,8 @@
         <div class="jumbotron" id="appoint-lecturer-form">
           <h2>Appoint lecturer Form</h2>
         <form class="form-horizontal">
-          <div class="form-group">
-            <label class="control-label col-sm-2" for="select-campus">Select Campus:</label>
-            <div class="col-sm-10">
-              <div class="input-group">
-               <div class="input-group-addon">
-                <span class="glyphicon glyphicon-home"></span>
-               </div>
-               <select class="form-control" id="select-campus">
-                <?php
 
-                  $sql = "SELECT * FROM campus;";
-                  $result = mysqli_query($conn, $sql);
-
-                  if (mysqli_num_rows($result) > 0) {
-                    // output data of each row
-                    while($row = $result->fetch_assoc()) {                      
-                      $id = $row['id'];
-                      $name = $row['name'];                                                        
-                      echo "<option value='$id'>".$name."</option>";
-                    }
-                  } 
-
-                  ?>
-               </select>
-             </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2" for="select-sem">Select Semester:</label>
-            <div class="col-sm-10">
-              <div class="input-group">
-               <div class="input-group-addon">
-                <span class="glyphicon glyphicon-tasks"></span>
-               </div>
-               <select class="form-control" id="select-sem">
-                <?php
-
-                  $sql = "SELECT * FROM semester;";
-                  $result = mysqli_query($conn, $sql);
-
-                  if (mysqli_num_rows($result) > 0) {
-                    // output data of each row
-                    while($row = $result->fetch_assoc()) {                      
-                      $id = $row['id'];
-                      $name = $row['name'];                                                        
-                      echo "<option value='$id'>".$name."</option>";
-                    }
-                  } 
-
-                  ?>
-               </select>
-             </div>
-            </div>
-          </div>
-
-          <div class="form-group">
+        <div class="form-group">
             <label class="control-label col-sm-2" for="uc-select-unit">Select Unit:</label>
             <div class="col-sm-10">
               <div class="input-group">
@@ -94,6 +49,64 @@
 
                   ?>
                  
+               </select>
+             </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="select-campus">Select Campus:</label>
+            <div class="col-sm-10">
+              <div class="input-group">
+               <div class="input-group-addon">
+                <span class="glyphicon glyphicon-home"></span>
+               </div>
+               <select class="form-control" id="uc-select-campus">
+               <option disabled selected>Select Campus</option>
+                <?php
+
+                  // $sql = "SELECT * FROM campus;";
+                  // $result = mysqli_query($conn, $sql);
+
+                  // if (mysqli_num_rows($result) > 0) {
+                  //   // output data of each row
+                  //   while($row = $result->fetch_assoc()) {                      
+                  //     $id = $row['id'];
+                  //     $name = $row['name'];                                                        
+                  //     echo "<option value='$id'>".$name."</option>";
+                  //   }
+                  // } 
+
+                  ?>
+               </select>
+             </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="select-sem">Select Semester:</label>
+            <div class="col-sm-10">
+              <div class="input-group">
+               <div class="input-group-addon">
+                <span class="glyphicon glyphicon-tasks"></span>
+               </div>
+               <select class="form-control" id="uc-select-sem">
+               <option disabled selected>Select Semester</option>
+                <?php
+
+                  // $sql = "SELECT * FROM semester;";
+                  // $result = mysqli_query($conn, $sql);
+
+                  // if (mysqli_num_rows($result) > 0) {
+                  //   // output data of each row
+                  //   while($row = $result->fetch_assoc()) {                      
+                  //     $id = $row['id'];
+                  //     $name = $row['name'];                                                        
+                  //     echo "<option value='$id'>".$name."</option>";
+                  //   }
+                  // } 
+
+                  ?>
                </select>
              </div>
             </div>
@@ -136,7 +149,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-tasks"></span>
                </div>
-               <select class="form-control" id="select-position">
+               <select class="form-control" id="uc-select-position">
                  <option value="lecturer">Lecturer</option>
                  <option value="tutor">Tutor</option>
                </select>
@@ -276,7 +289,11 @@
 <script>
 $( "#uc-select-unit" ).change(function() {
   $("#uc-select-staff").empty();
+  $("#uc-select-campus").empty();
+
   $("#uc-select-staff").append("<option disabled selected>Select Staff</option>");
+  $("#uc-select-campus").append("<option disabled selected>Select Campus</option>");
+
   var unit_code =  $( "#uc-select-unit" ).val();
   $.ajax({
     url:"controller/backend.php",
@@ -295,8 +312,51 @@ $( "#uc-select-unit" ).change(function() {
     }
 
   });
+
+  //loading campus associated with the selected unit
+  $.ajax({
+    url:"controller/backend.php",
+    type:"POST",
+    data: {unit_code_for_campus:unit_code},
+    success: function(data, status){
+      // alert(data);
+      // console.log(data);      
+      var campus_for_selected_units = JSON.parse(data);      
+      for (var campus_id in campus_for_selected_units){
+        console.log( campus_id, campus_for_selected_units[campus_id] );
+        var campus_name = campus_for_selected_units[campus_id];
+        $("#uc-select-campus").append("<option value='"+campus_id+"'>"+ campus_name +"</option>")
+      }
+        
+    }
+
+  });
 });
 
+
+$( "#uc-select-campus" ).change(function() {
+  $("#uc-select-sem").empty();
+  $("#uc-select-sem").append("<option disabled selected>Select Semester</option>");
+  var unit_code =  $( "#uc-select-unit" ).val();
+  var campus_code = $( "#uc-select-campus" ).val();
+  $.ajax({
+    url:"controller/backend.php",
+    type:"POST",
+    data: {unit_code_for_sem:unit_code, campus_code_for_sem:campus_code},
+    success: function(data, status){
+      //alert(data);
+      console.log(data);      
+      var sem_for_selected_campus = JSON.parse(data);      
+      for (var sem_id in sem_for_selected_campus){
+        console.log( sem_id, sem_for_selected_campus[sem_id] );
+        var sem_name = sem_for_selected_campus[sem_id];
+        $("#uc-select-sem").append("<option value='"+sem_id+"'>"+ sem_name +"</option>")
+      }
+        
+    }
+
+  });
+});
 
 //checking method
 $("#uc-select-staff").change(function() {

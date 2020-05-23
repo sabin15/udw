@@ -27,7 +27,13 @@
                   session_start();
                   $_SESSION['username'] = $user['name'];
                   $_SESSION['logged'] = true;
-                  $_SESSION['type']=$type;
+                  $_SESSION['type']=$user['type'];
+                  if ($type=='student'){
+                    $_SESSION['user_id']=$user['student_id'];
+                  }
+                  else{
+                    $_SESSION['user_id']=$user['staff_id'];
+                  }
                   echo true;
                   //header("Location:/udw/index.php");
                     

@@ -87,7 +87,7 @@
       </div>
 
        <div class="input-group">
-         <button class="btn btn-primary" onclick="edit_timetable()">Submit</button>
+         <button class="btn btn-primary" onclick="edit_timetable();return false;">Submit</button>
        </div>
 
       </div>

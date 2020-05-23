@@ -1,7 +1,8 @@
 <?php
     if(!isset($_SESSION)) 
     { 
-        session_start();         
+        session_start();
+               
       
     } 
 ?>
@@ -45,12 +46,69 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="index.php">Home</a></li>
-                    <li class="active"><a href="login.php">Login</a></li>
-                    <li><a href="register.php">Register</a></li>
-                    <li><a href="enrollment.php">Enrollment</a></li>
+                    <!-- <li class="active"><a href="login.php">Login</a></li> -->
+                    <!-- <li><a href="register.php">Register</a></li> -->
                     <li><a href="unit-details.php">Unit Details</a></li>
-                    <li><a href="timetable.php">My Timetable</a></li>                    
-                    <li class="dropdown">
+                    
+                    
+                    
+                    <?php
+                        if(isset($_SESSION['logged']) && $_SESSION['logged'] && $_SESSION['type']=='dc'){
+                            echo '<li class="dropdown">';
+                            echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Master Lists';
+                            echo '<span class="caret"></span></a>';
+                            echo '<ul class="dropdown-menu">';
+                            echo '<li><a href="masterunits.php">Units</a></li>';
+                            echo '<li><a href="masterlist.php">Academic Staffs</a></li>';                      
+                            echo '</ul>';
+                            echo '</li>';
+                            echo '<li><a href="manage-timetable.php">Manage Timetable</a></li>';
+                            echo '<li><a href="#">Students</a></li>';
+                        }
+                     ?>
+                    <?php
+                        if(isset($_SESSION['logged']) && $_SESSION['logged'] && $_SESSION['type']=='uc'){
+                            echo '<li class="dropdown">';
+                            echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Management';
+                            echo '<span class="caret"></span></a>';
+                            echo '<ul class="dropdown-menu">';
+                            echo '<li><a href="uc_management.php">Student/Tutors</a></li>';
+                            echo '<li><a href="masterlist-uc.php">Manage Staff</a></li>';
+                            echo '</ul>';
+                            echo '</li>';
+                            echo '<li><a href="manage-timetable.php">Manage Timetable</a></li>';
+                            echo '<li><a href="#">Students</a></li>';                         
+                            
+                        }
+                     ?>
+
+                    <?php
+                        if(isset($_SESSION['logged']) && $_SESSION['logged'] && $_SESSION['type']=='lecturer'){
+                            echo '<li class="dropdown">';
+                            echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Management';
+                            echo '<span class="caret"></span></a>';
+                            echo '<ul class="dropdown-menu">';                    
+                            echo '</ul>';
+                            echo '</li>';
+                            echo '<li><a href="#">Students</a></li>';  
+                            
+                        }
+                     ?>
+
+                    
+                      <?php
+                        if(isset($_SESSION['logged']) && $_SESSION['logged'] && $_SESSION['type']=='student'){
+                            echo '<li><a href="enrollment.php">Enrollment</a></li>';
+                            echo '<li><a href="timetable.php">Timetable</a></li>';
+                            echo '<li><a href="tutorials.php">Tutorials</a></li>';
+                            
+                        }
+                     ?>
+
+
+
+
+                    <!-- <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">MasterList
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -67,7 +125,7 @@
                         <li><a href="uc_management.php">UC</a></li>                        
                         </ul>
                     </li>
-                    <li><a href="manage-timetable.php">Manage Timetable</a></li>
+                    <li><a href="manage-timetable.php">Manage Timetable</a></li> -->
                     
                 </ul>         
                 <ul class="nav navbar-nav navbar-right">
@@ -76,7 +134,7 @@
                         <?php 
                             if(isset($_SESSION['logged']) && $_SESSION['logged'])
                             { 
-                                echo '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> '.$_SESSION["username"].' ['.$_SESSION["type"].']';
+                                echo '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> '.$_SESSION["username"].' ['.$_SESSION["type"].$_SESSION["user_id"].']';
                                 echo '<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                 <li><a href="controller/logout.php">Logout</a></li>                        

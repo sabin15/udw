@@ -5,7 +5,7 @@
     $errors=array();
 
 	if($_POST){
-		$user_id=mysqli_escape_string($conn, $_POST['f_name']);
+		$user_id=mysqli_escape_string($conn, $_POST['user_id']);
         $name=mysqli_escape_string($conn, $_POST['name']);
         $email=mysqli_escape_string($conn,$_POST['email']);
         $password=password_hash($_POST['password'], PASSWORD_BCRYPT);
@@ -26,7 +26,7 @@
                     
                 
         if (count($errors) == 0) {
-            $sql="INSERT INTO student(name, email, password, address, phone_number) VALUES('$name', '$email', '$password' ,'$address', '$contact')";
+            $sql="INSERT INTO student(student_id,name, email, password, address, phone_number) VALUES('$user_id','$name', '$email', '$password' ,'$address', '$contact')";
             $result=mysqli_query($conn,$sql);
             if($result){
                 echo true;
