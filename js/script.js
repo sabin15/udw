@@ -187,27 +187,77 @@ $( function() {
 //   date_input.datepicker({format: 'mm/dd/yyyy', container: container,todayHighlight: true,autoclose: true})
 // })
 
-function enroll_form(){
+function enroll_form(unit){
+  console.log(unit);
+
   $('#enroll-form').show();
   $('#unit-summary').show();
   $('#unit-locate').hide();
+  $("#select-campus").empty();
+  $("#select-campus").append("<option disabled selected>Select Campus</option>");
+  var elem = document.getElementById("enroll-unit-code");
+  if(typeof elem !== 'undefined' && elem !== null) {
+    elem.innerHTML = unit;
+  }
+ 
+
+
+  var unit_code =  unit;
+    //loading campus associated with the selected unit
+  $.ajax({
+    url:"controller/backend.php",
+    type:"POST",
+    data: {unit_code_for_campus:unit_code},
+    success: function(data, status){
+      // alert(data);
+      // console.log(data);      
+      var campus_for_selected_units = JSON.parse(data);      
+      for (var campus_id in campus_for_selected_units){
+        console.log( campus_id, campus_for_selected_units[campus_id] );
+        var campus_name = campus_for_selected_units[campus_id];
+        $("#select-campus").append("<option value='"+campus_id+"'>"+ campus_name +"</option>")
+      }
+        
+    }
+
+  });
 
 
 }
 
 function enroll_function(){
   //alert("Hello");
-  swal("Enrolled Successfully", "", "success");
+  var campus = $("#select-campus").val();
+  var sem = $("#select-sem").val();
+  var unit_code =  document.getElementById('enroll-unit-code').innerHTML;
+  console.log("proof "+campus+" "+sem+" "+unit_code);
+  $.ajax({
+    url:"controller/enrollment.php",
+    type:"POST",
+    data: {enroll_campus:campus, enroll_sem:sem, enroll_unit:unit_code},
+    success: function(data, status){
+      //alert(data);
+      console.log(data);
+      if (data){
+        swal("Enrolled Successfully", "You have been enrolled successfully", "success");
+        window.location="/udw/enrollment.php";
+      }
+      else{
+        swal("Enrollment Failed", "There might be some issue on the server", "warning");
+      }
+        
+    }
+  });  
 }
 
 function appoint_lecturer_tutor(){
   
-  var campus = $("#select-campus").val();
-  var sem = $("#select-sem").val();
+  var campus = $("#uc-select-campus").val();
+  var sem = $("#uc-select-sem").val();
   var unit = $("#uc-select-unit").val();
   var staff = $("#uc-select-staff").val();
-  var position = $("#select-position").val();
-  //alert(campus+sem+unit+staff+position);
+  var position = $("#uc-select-position").val();
+  alert(campus+"."+sem+"."+unit+"."+staff+"."+position);
   $.ajax({
     url:"controller/backend.php",
     type:"POST",

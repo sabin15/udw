@@ -1,3 +1,13 @@
+<?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start();
+        if(!isset($_SESSION['type']) || $_SESSION['type']!='student'){
+          header("Location:/udw/index.php");
+        }         
+      
+    } 
+?>
 <?php require('header.php')?>
 
       <div class="jumbotron-fluid">

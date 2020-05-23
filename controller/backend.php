@@ -144,6 +144,45 @@ if(isset($_POST['unit_code']) && isset($_POST['unit_name']) && isset($_POST['uni
     echo json_encode($staff_for_units);
   }
 
+   //campus for selected unit
+   if(isset($_POST['unit_code_for_campus'])){
+    $unit_code = $_POST['unit_code_for_campus'];
+    $staff_for_units = array();  
+    $query = "SELECT DISTINCT u.campus_id, c.name FROM ucs u, campus c where u.campus_id = c.id and u.unit_code='$unit_code'";
+    $result = mysqli_query($conn, $query);
+
+        if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+            while($row = $result->fetch_assoc()) {                      
+                $campus_id = $row['campus_id'];
+                $campus_name = $row['name'];                                                                        
+                $campus_for_units[$campus_id] = $campus_name;
+            }
+        }
+    echo json_encode($campus_for_units);
+  }
+
+  //Semester for selected unit and campus
+  if(isset($_POST['unit_code_for_sem']) AND isset($_POST['campus_code_for_sem'])){
+    $unit_code = $_POST['unit_code_for_sem'];
+    $campus_code = $_POST['campus_code_for_sem'];
+    $staff_for_units = array();  
+    $query = "SELECT DISTINCT u.semester, s.name FROM ucs u, semester s where u.semester = s.id and u.unit_code='$unit_code' and u.campus_id='$campus_code'";
+    $result = mysqli_query($conn, $query);
+
+        if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+            while($row = $result->fetch_assoc()) {                      
+                $semester_id = $row['semester'];
+                $semester_name = $row['name'];                                                                        
+                $sem_for_campus[$semester_id] = $semester_name;
+            }
+        }
+    echo json_encode($sem_for_campus);
+  }
+
+  
+
   //appoint lecturer/tutor by uc
   if(isset($_POST['campus']) && isset($_POST['sem']) && isset($_POST['unit']) && isset($_POST['staff']) && isset($_POST['position'])){
       $campus = $_POST['campus'];

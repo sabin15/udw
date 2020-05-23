@@ -137,7 +137,7 @@
                <div class="input-group-addon">
                 <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
                </div>
-              <input type="text" class="form-control" id="staff-id" name="staff_id" placeholder="Please enter staff ID" required>
+              <input type="text" class="form-control" id="staff-id" name="user_id" placeholder="Please enter staff ID" required>
               </div>
             </div>
           </div>
