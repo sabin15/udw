@@ -44,7 +44,7 @@ function appoint_lecturer_form(){
   $('#manage_lecturer').hide();
 }
 
-function edit_staff_details($staffId,$staff_name,$position,$campus){
+function edit_staff_details($staffId,$staff_name,$unit_code,$campus,$position){
 
 	document.getElementById("edit-staff").style.display="block";
 	document.getElementById("staff_id").value=$staffId;
