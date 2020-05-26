@@ -47,31 +47,55 @@ function appoint_lecturer_form(){
 function edit_staff_details($staffId,$staff_name,$unit_code,$campus,$position){
 
 	document.getElementById("edit-staff").style.display="block";
-	document.getElementById("staff_id").value=$staffId;
-	document.getElementById("staff_name").value=$staff_name;
-	document.getElementById("staff_position").value=$position;
-  document.getElementById("select_campus").value=$campus;
+  document.getElementById("staff_id").value=$staffId;
+  document.getElementById("staff_name").value=$staff_name;
+  document.getElementById("edit-unit").value=$unit_code;  
+  document.getElementById("edit-campus").value=$campus;
+	document.getElementById("edit-position").value=$position;
+  
 	staffId=$staffId;
 }
 
-function update_staff_details(staffId){
-  console.log(staffId);
-	var new_position=document.getElementById("staff_position").value;
+function update_staff_details(){
+  console.log(document.getElementById("edit-unit").value);
+  var new_unit=document.getElementById("edit-unit").value;
+  
+  var new_campus=document.getElementById("edit-campus").value;
+  var new_semester=document.getElementById("edit-sem").value;
+  var new_position=document.getElementById("edit-position").value;
+  console.log(new_unit);
   var staffId=document.getElementById("staff_id").value;
-  console.log(staffId);
+  console.log(new_unit+new_campus+new_semester+new_position);
+  var action = 'update';
+
 
 	$.ajax({
 
     type: "POST",
     url: "controller/load_edit_staff.php",
-    data: {staffId:staffId,position:new_position},
+    data: {staffId:staffId,unit:new_unit, campus:new_campus, semester:new_semester,position:new_position,action:action},
     success : function(result)
       {
+        alert(result);
         swal(result, "", "success");
+        location.reload();
       }
     });
-  //
- // location.reload();
+}
+function delete_staff(staffId, semester, unit, campus, position){
+  var action = 'delete';
+	$.ajax({
+
+    type: "POST",
+    url: "controller/load_edit_staff.php",
+    data: {staffId:staffId,unit:unit, campus:campus, semester:semester,position:position,action:action},
+    success : function(result)
+      {
+        alert(result);
+        swal(result, "", "success");
+        location.reload();
+      }
+    });
 }
 
 function manage_lecturer(){
@@ -109,7 +133,7 @@ function assign_campus_semester(){
   swal("Assigned Successfully", "", "success");
 }
 
-document.getElementById("select-unit").addEventListener("change",filterStudents);
+//document.getElementById("select-unit").addEventListener("change",filterStudents);
 function filterStudents(){
   unit_selected = document.getElementById("select-unit").value;
   console.log(unit_selected);
@@ -280,15 +304,15 @@ function appoint_lecturer_form(){
   $('#manage_lecturer').hide();
 }
 
-function edit_staff_details($staffId,$staff_name,$position,$campus){
+// function edit_staff_details($staffId,$staff_name,$position,$campus){
 
-	document.getElementById("edit-staff").style.display="block";
-	document.getElementById("staff_id").value=$staffId;
-	document.getElementById("staff_name").value=$staff_name;
-	document.getElementById("staff_position").value=$position;
-  document.getElementById("select_campus").value=$campus;
-	staffId=$staffId;
-}
+// 	document.getElementById("edit-staff").style.display="block";
+// 	document.getElementById("staff_id").value=$staffId;
+// 	document.getElementById("staff_name").value=$staff_name;
+// 	document.getElementById("staff_position").value=$position;
+//   document.getElementById("select_campus").value=$campus;
+// 	staffId=$staffId;
+// }
 
 // function update_staff_details(){
 //   /*
