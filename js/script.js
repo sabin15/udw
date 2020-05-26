@@ -54,28 +54,24 @@ function edit_staff_details($staffId,$staff_name,$position,$campus){
 	staffId=$staffId;
 }
 
-function update_staff_details(){
-  /*
+function update_staff_details(staffId){
+  console.log(staffId);
 	var new_position=document.getElementById("staff_position").value;
-	var new_campus=document.getElementById("select_campus").value;
+  var staffId=document.getElementById("staff_id").value;
+  console.log(staffId);
 
 	$.ajax({
 
-                type: "POST",
-                 url: "php/staff_update.php",
-                 async: false,
-                 data: {staffId:staffId,position:new_position,campus:new_campus},
-                 success : function(text)
-                 {
-                     status = text;
-
-                 }
-      });
-
-	alert(status);
-	location.reload();
-  */
-  swal("Successfully Updated", "", "success");
+    type: "POST",
+    url: "controller/load_edit_staff.php",
+    data: {staffId:staffId,position:new_position},
+    success : function(result)
+      {
+        swal(result, "", "success");
+      }
+    });
+  //
+ // location.reload();
 }
 
 function manage_lecturer(){
@@ -294,29 +290,29 @@ function edit_staff_details($staffId,$staff_name,$position,$campus){
 	staffId=$staffId;
 }
 
-function update_staff_details(){
-  /*
-	var new_position=document.getElementById("staff_position").value;
-	var new_campus=document.getElementById("select_campus").value;
+// function update_staff_details(){
+//   /*
+// 	var new_position=document.getElementById("staff_position").value;
+// 	var new_campus=document.getElementById("select_campus").value;
 
-	$.ajax({
+// 	$.ajax({
 
-                type: "POST",
-                 url: "php/staff_update.php",
-                 async: false,
-                 data: {staffId:staffId,position:new_position,campus:new_campus},
-                 success : function(text)
-                 {
-                     status = text;
+//                 type: "POST",
+//                  url: "php/staff_update.php",
+//                  async: false,
+//                  data: {staffId:staffId,position:new_position,campus:new_campus},
+//                  success : function(text)
+//                  {
+//                      status = text;
 
-                 }
-      });
+//                  }
+//       });
 
-	alert(status);
-	location.reload();
-  */
-  swal("Successfully Updated", "", "success");
-}
+// 	alert(status);
+// 	location.reload();
+//   */
+//   swal("Successfully Updated", "", "success");
+// }
 
 function manage_lecturer(){
   $('#appoint-lecturer-form').hide();

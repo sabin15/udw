@@ -1,8 +1,8 @@
 <?php
-$server_name = "sql12.freemysqlhosting.net";
-$user_name = "sql12341303";
-$password = "XUTuyiNi78";
-$database_name = "sql12341303";
+$server_name = "alacritas.cis.utas.edu.au";
+$user_name = "nlsherpa";
+$password = "554385";
+$database_name = "nlsherpa";
 
 // Create connection
 $conn = new mysqli($server_name, $user_name, $password, $database_name);

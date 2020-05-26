@@ -11,9 +11,10 @@
         $password=password_hash($_POST['password'], PASSWORD_BCRYPT);
 		$address=mysqli_escape_string($conn,$_POST['address']);
         $contact=mysqli_escape_string($conn,$_POST['contact']);
-        $qualification=mysqli_escape_string($conn,$_POST['qualification']);
-        $expertise=mysqli_escape_string($conn,$_POST['expertise']);
-        $type=mysqli_escape_string($conn,$_POST['type']);
+        //$qualification=mysqli_escape_string($conn,$_POST['qualification']);
+        //$expertise=mysqli_escape_string($conn,$_POST['expertise']);
+        $dob = mysqli_escape_string($conn,$_POST['student-dob']);
+        
 
         $email_check_query = "SELECT * FROM student WHERE email='$email' LIMIT 1";
         $result = mysqli_query($conn, $email_check_query);

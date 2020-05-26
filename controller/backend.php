@@ -118,8 +118,14 @@ if(isset($_POST['unit_code']) && isset($_POST['unit_name']) && isset($_POST['uni
     //echo $unit_selected . $max_staff;
     
     $query = "INSERT INTO `appoint_staff` (`id`, `unit_code`, `staff_id`, `position`) VALUES (NULL, '$unit_selected', '$staff_id', '$position');";
-    if(mysqli_query($conn, $query)){
-        echo "Successfully Appointed as ".$position."  for ". $unit_selected. " unit";
+    if(mysqli_query($conn, $query)){        
+        $query2 = "DELETE FROM `appoint_staff` WHERE `position` = 'staff' AND `staff_id` = $staff_id;";
+        if(mysqli_query($conn, $query2)){
+            echo "Successfully Appointed as ".$position."  for ". $unit_selected. " unit";
+        }
+        else{
+            echo "Not successful";
+        }
     }
     else{
         echo "Not successful";
