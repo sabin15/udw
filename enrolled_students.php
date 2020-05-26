@@ -2,36 +2,25 @@
     if(!isset($_SESSION)) 
     { 
         session_start();
-        if(!isset($_SESSION['type']) || $_SESSION['type']!='student'){
+        if(!isset($_SESSION['type']) || $_SESSION['type'] =='student'){
           header("Location:/udw/index.php");
         }         
       
     } 
 ?>
 
-<?php require('header.php') ?>
-<?php require('controller/enrollment.php')?>
-
-
-
-    
+<?php require('header.php') ?>    
     <div class="jumbotron">
-        <h3>Enrolled Units</h3>
+        <h3>Enrolled Students</h3>
 
         <table class="table table-hover" id="enrolled_table">
           <thead>
             <tr>
               
+              <th data-field="student_id">Unit</th>
+              <th data-field="student_name">Campus</th>
+              <th data-field="email">Email</th>
               <th data-field="unit">Unit</th>
-              <th data-field="campus">Campus</th>
-              <th data-field="semester">Semester</th>
-              <th data-field="type">type</th>
-              <th data-field="start_date">Start Date</th>
-              <th data-field="end_date">End Date</th>
-              <th data-field="start_time">Start Time</th>
-              <th data-field="end_time">End Time</th>
-              <th data-field="day">Day</th>
-              
               
 
             </tr>
@@ -72,12 +61,10 @@ $( "#select-campus" ).change(function() {
 
 <script>
  $(document).ready(function(){
-    var student_id = '<?php echo $_SESSION['user_id']?>';
-    console.log(student_id);
     $('#enrolled_table').bootstrapTable('destroy');
     $.post( 
-        "/udw/controller/load_timetable_final.php",
-        {student_id},
+        "/udw/controller/load_enrolled_students.php",
+        {},
         function(data) {
           console.log(data);
           $('#enrolled_table').bootstrapTable({

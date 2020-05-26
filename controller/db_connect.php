@@ -1,8 +1,8 @@
 <?php
-$server_name = "alacritas.cis.utas.edu.au";
-$user_name = "nlsherpa";
-$password = "554385";
-$database_name = "nlsherpa";
+$server_name = "localhost";
+$user_name = "root";
+$password = "root";
+$database_name = "cms";
 
 // Create connection
 $conn = new mysqli($server_name, $user_name, $password, $database_name);

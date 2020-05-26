@@ -24,8 +24,27 @@
       </form>
     </div>
     
+    <div class="jumbotron">
+        <h3>Enrolled Units</h3>
+
+        <table class="table table-hover" id="enrolled_table">
+          <thead>
+            <tr>
+              
+              <th data-field="unit">Unit</th>
+              <th data-field="campus">Campus</th>
+              <th data-field="semester">Semester</th>
+              
+              
+
+            </tr>
+          </thead>
+        </table>
+
+      </div>
 
     <div class="jumbotron" id="unit-locate">
+    <h3>New Enrollment</h3>
       <div class="panel-group" id="accordion">
         <?php
         loadUnits();
@@ -215,6 +234,25 @@ $( "#select-campus" ).change(function() {
 
   });
 });
+</script>
+
+<script>
+ $(document).ready(function(){
+    var student_id = '<?php echo $_SESSION['user_id']?>';
+    console.log(student_id);
+    $('#enrolled_table').bootstrapTable('destroy');
+    $.post( 
+        "/udw/controller/load_enrolled_units.php",
+        {student_id},
+        function(data) {
+          console.log(data);
+          $('#enrolled_table').bootstrapTable({
+              data: data
+          });
+      },
+      "json"
+    );
+  });
 </script>
 
 <?php require('footer.php') ?>

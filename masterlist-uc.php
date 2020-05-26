@@ -20,7 +20,7 @@
 
         <div class="jumbotron" id="appoint-lecturer-form">
           <h2>Appoint lecturer Form</h2>
-        <form class="form-horizontal">
+          <form class="form-horizontal">
 
         <div class="form-group">
             <label class="control-label col-sm-2" for="uc-select-unit">Select Unit:</label>
