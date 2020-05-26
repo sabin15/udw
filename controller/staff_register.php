@@ -13,6 +13,7 @@
         $contact=mysqli_escape_string($conn,$_POST['staff_contact']);
         $qualification=mysqli_escape_string($conn,$_POST['staff_qualification']);
         $expertise=mysqli_escape_string($conn,$_POST['staff_expertise']);
+        $dob = mysqli_escape_string($conn,$_POST['staff-dob']);
         
                         
         $email_check_query = "SELECT * FROM staff WHERE email='$email' LIMIT 1";
@@ -26,7 +27,15 @@
             $sql="INSERT INTO staff(staff_id,name, email, password, address, qualification, expertise, phone_number) VALUES('$user_id','$name', '$email', '$password' ,'$address', '$qualification', '$expertise', '$contact')";
             $result=mysqli_query($conn,$sql);
             if($result){
-                echo true;
+                $staff_id = mysqli_insert_id($conn);
+                $query = "INSERT INTO `appoint_staff` (`id`, `unit_code`, `staff_id`, `position`) VALUES (NULL, NULL, '$staff_id', 'staff');";
+                
+                $result2=mysqli_query($conn,$query);
+                
+                if($result2){
+                    echo true;
+                }
+                
                 //echo "Added new user successfully";
                 //header('location: /udw/login.php');
             }

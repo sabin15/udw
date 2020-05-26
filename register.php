@@ -94,7 +94,7 @@
              <div class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
              </div>
-             <input type="text" class="form-control" id="student-dob" name="dob" placeholder="MM/DD/YYYY" />
+             <input type="text" class="form-control" id="student-dob" name="student-dob" placeholder="MM/DD/YYYY" />
             </div>
            </div>
           </div>
@@ -218,6 +218,19 @@
               </div>
             </div>
           </div>
+
+          <div class="form-group ">
+           <label class="control-label col-sm-2 requiredField" for="date">Date:</label>
+           <div class="col-sm-10">
+            <div class="input-group">
+             <div class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+             </div>
+             <input type="text" class="form-control" id="staff-dob" name="staff-dob" placeholder="MM/DD/YYYY" />
+            </div>
+           </div>
+          </div>
+
           <div class="form-group">
             <label class="control-label col-sm-2" for="staff-phone">Phone Number:</label>
             <div class="col-sm-10">

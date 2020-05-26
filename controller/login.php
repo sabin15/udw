@@ -13,7 +13,9 @@
       }
       else
       {
-        $user_check_query = "SELECT * FROM staff WHERE email='$email'  LIMIT 1";
+        //$user_check_query = "SELECT * FROM staff WHERE email='$email'  LIMIT 1";
+        $user_check_query = "SELECT * FROM staff S JOIN appoint_staff A WHERE S.id=A.staff_id AND S.email='$email'  LIMIT 1";
+        
 
       } 
 
@@ -27,11 +29,13 @@
                   session_start();
                   $_SESSION['username'] = $user['name'];
                   $_SESSION['logged'] = true;
-                  $_SESSION['type']=$user['type'];
+                  
                   if ($type=='student'){
                     $_SESSION['user_id']=$user['student_id'];
+                    $_SESSION['type']=$type;
                   }
                   else{
+                    $_SESSION['type']=$user['position'];
                     $_SESSION['user_id']=$user['staff_id'];
                   }
                   echo true;

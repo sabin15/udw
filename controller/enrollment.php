@@ -51,7 +51,7 @@ include ('db_connect.php');
 ?>
 
 <?php
-    session_start();
+    //session_start();
     include ('db_connect.php');
     if(isset($_POST['enroll_campus']) && isset($_POST['enroll_sem']) && isset($_POST['enroll_unit']) && isset($_SESSION["user_id"]) ){
         $campus = $_POST['enroll_campus'];
