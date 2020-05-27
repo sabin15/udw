@@ -85,13 +85,14 @@
                      ?>
 
                     <?php
-                        if(isset($_SESSION['logged']) && $_SESSION['logged'] && ($_SESSION['type']=='lecturer' || $_SESSION['type']=='lecturer')){
+                        if(isset($_SESSION['logged']) && $_SESSION['logged'] && ($_SESSION['type']=='lecturer' || $_SESSION['type']=='tutor')){
                             echo '<li class="dropdown">';
                             echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Management';
                             echo '<span class="caret"></span></a>';
                             echo '<ul class="dropdown-menu">';                    
                             echo '</ul>';
                             echo '</li>';
+                            echo '<li><a href="edit_staff.php">Staff</a></li>';
                             echo '<li><a href="enrolled_students.php">Students</a></li>';  
                             
                         }
@@ -102,7 +103,7 @@
                         if(isset($_SESSION['logged']) && $_SESSION['logged'] && $_SESSION['type']=='student'){
                             echo '<li><a href="enrollment.php">Enrollment</a></li>';
                             echo '<li><a href="timetable.php">Timetable</a></li>';
-                            echo '<li><a href="tutorials.php">Tutorials</a></li>';
+                            
                             
                         }
                      ?>
