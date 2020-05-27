@@ -92,8 +92,6 @@
                             echo '<ul class="dropdown-menu">';                    
                             echo '</ul>';
                             echo '</li>';
-                            echo '<li><a href="#">Students</a></li>'; 
-                            echo '<li><a href="edit_staff.php">Staff</a></li>';
                             echo '<li><a href="enrolled_students.php">Students</a></li>';  
                             
                         }
