@@ -56,6 +56,18 @@ function edit_staff_details($staffId,$staff_name,$unit_code,$campus,$position){
 	staffId=$staffId;
 }
 
+function edit_student_details($student_id,$student_name,$unit_name,$unit_code,$campus, $semester){
+
+	document.getElementById("edit-student").style.display="block";
+  document.getElementById("student_id").value=$student_id;
+  document.getElementById("student_name").value=$student_name;
+  document.getElementById("edit-unit").value=$unit_code;  
+  document.getElementById("edit-campus").value=$campus;
+  document.getElementById("edit-sem").value=$semester;
+  
+	student_id=$student_id;
+}
+
 function update_staff_details(){
   console.log(document.getElementById("edit-unit").value);
   var new_unit=document.getElementById("edit-unit").value;
@@ -82,6 +94,33 @@ function update_staff_details(){
       }
     });
 }
+
+function update_student_details(){
+  console.log(document.getElementById("edit-unit").value);
+  var new_unit=document.getElementById("edit-unit").value;
+  
+  var new_campus=document.getElementById("edit-campus").value;
+  var new_semester=document.getElementById("edit-sem").value;
+  console.log(new_unit);
+  var student_id=document.getElementById("student_id").value;
+  console.log(new_unit+new_campus+new_semester+student_id);
+  var action = 'update';
+
+
+	$.ajax({
+
+    type: "POST",
+    url: "controller/load_edit_student.php",
+    data: {student_id:student_id,unit:new_unit, campus:new_campus, semester:new_semester,action:action},
+    success : function(result)
+      {
+        alert(result);
+        swal(result, "", "success");
+        location.reload();
+      }
+    });
+}
+
 function delete_staff(staffId, semester, unit, campus, position){
   var action = 'delete';
 	$.ajax({
@@ -89,6 +128,22 @@ function delete_staff(staffId, semester, unit, campus, position){
     type: "POST",
     url: "controller/load_edit_staff.php",
     data: {staffId:staffId,unit:unit, campus:campus, semester:semester,position:position,action:action},
+    success : function(result)
+      {
+        alert(result);
+        swal(result, "", "success");
+        location.reload();
+      }
+    });
+}
+
+function delete_student(studentId, unit, campus, semester){
+  var action = 'delete';
+	$.ajax({
+
+    type: "POST",
+    url: "controller/load_edit_student.php",
+    data: {studentId:studentId,unit:unit, campus:campus, semester:semester,action:action},
     success : function(result)
       {
         alert(result);
@@ -299,10 +354,7 @@ function lecture_timetable(){
   $('#lecture-timetable').show();
 }
 
-function appoint_lecturer_form(){
-  $('#appoint-lecturer-form').show();
-  $('#manage_lecturer').hide();
-}
+
 
 // function edit_staff_details($staffId,$staff_name,$position,$campus){
 
@@ -338,10 +390,7 @@ function appoint_lecturer_form(){
 //   swal("Successfully Updated", "", "success");
 // }
 
-function manage_lecturer(){
-  $('#appoint-lecturer-form').hide();
-  $('#manage_lecturer').show();
-}
+
 
 function tutorial_timetable(){
   $('#tutorial-timetable').show();
