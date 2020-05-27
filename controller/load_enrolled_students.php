@@ -6,7 +6,7 @@
        header("Location:/udw/index.php");
      }
      $staff_id=$_SESSION['user_id'];
-     echo $staff_id;      
+     //echo $staff_id;      
    
  } 
 ?>

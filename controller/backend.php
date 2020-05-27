@@ -2,9 +2,9 @@
 require_once("db_connect.php");
 //add unit
 if(isset($_POST['unit_code']) && isset($_POST['unit_name']) && isset($_POST['unit_description'])){
-    $unit_code = $_POST['unit_code'];
-    $unit_name = $_POST['unit_name'];
-    $unit_description = $_POST['unit_description'];
+    $unit_code = mysqli_escape_string($conn,$_POST['unit_code']);
+    $unit_name = mysqli_escape_string($conn,$_POST['unit_name']);
+    $unit_description = mysqli_escape_string($conn,$_POST['unit_description']);
     //echo $unit_code;
   
     $query = "INSERT INTO `unit` (`code`, `name`, `description`) VALUES ('$unit_code', '$unit_name', '$unit_description');";
@@ -207,6 +207,32 @@ if(isset($_POST['unit_code']) && isset($_POST['unit_name']) && isset($_POST['uni
         echo "Not successful";//$conn -> error;
     }
   }
+
+
+  //load semster and campus with units
+  function loadUnits(){
+    include("db_connect.php");
+    
+    $load_unit_query = "SELECT * FROM unit";
+    $result = mysqli_query($conn, $load_unit_query);
+    while($row = mysqli_fetch_assoc($result)) {
+        $unit=$row['code'];
+        $load_avail_query = "SELECT DISTINCT uc.unit_code as unit_code, u.name as unit, c.name as campus, s.name as semester from ucs uc JOIN unit u JOIN campus c JOIN semester s where uc.unit_code=u.code AND uc.semester=s.id AND uc.campus_id=c.id AND uc.unit_code='$unit' ORDER BY campus";
+        $result_avail = mysqli_query($conn, $load_avail_query);
+            
+        while($row_avail = mysqli_fetch_assoc($result_avail)) {
+            
+            
+            echo '<li><b>'.$row_avail["campus"]."   -   </b>".$row_avail["semester"].'</li>';
+            
+        }
+            
+        
+    }
+
+}
+
+
   
                 
                 

@@ -27,7 +27,7 @@
                 <div class="form-group row">
                     <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg"></label>
                     <div class="col-sm-5">
-                    <button type="submit" class="btn btn-success" onclick="add_unit()">Add Unit</button>
+                    <button type="submit" class="btn btn-success" onclick="add_unit();return false;">Add Unit</button>
                     </div>
                 </div>
 
@@ -142,7 +142,7 @@ function add_unit(){
         },function(data, status){
         //$("#updateUnitModal").modal("hide");
         alert(data);
-        //location.reload();
+        location.reload();
   
         }
     );

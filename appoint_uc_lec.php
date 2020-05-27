@@ -82,7 +82,7 @@
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-primary sweet-3" onclick="appoint_uc_lec()">Appoint</button>
+              <button type="submit" class="btn btn-primary sweet-3" onclick="appoint_uc_lec();return false;">Appoint</button>
             </div>
           </div>
         </form>

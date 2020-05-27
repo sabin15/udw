@@ -420,8 +420,8 @@ function edit_timetable(){
   var selected_semester = document.getElementById('select-semester').value;
   var selected_campus = document.getElementById('select-campus').value;
   $('#edit-timetable').show();
-  document.getElementById('timetable-heading').innerHTML = "Timetable for " + selected_unit + " on "+ selected_semester;
-  document.getElementById('campus-name').innerHTML = selected_campus;
+  document.getElementById('timetable-heading').innerHTML = "Timetable for " + selected_unit;
+  //document.getElementById('campus-name').innerHTML = selected_campus;
   document.getElementById('unit').value=selected_unit;
   document.getElementById('semester').value=selected_semester;
   document.getElementById('campus').value=selected_campus;
@@ -485,3 +485,32 @@ function addTutortoUnit(){
 function reserve_totorial_lecture(){
   alert("reached");
 }
+
+
+$( "#enroll-select-unit").change(function() {
+  console.log($( "#enroll-select-unit").val());
+  $('#all_unit_details').show();
+  var action = "enroll";
+
+  var unit_code =  $( "#enroll-select-unit").val();
+  $.ajax({
+    url:"controller/unit_details.php",
+    type:"POST",
+    data: {unit_code:unit_code, action:action},
+    success: function(data, status){
+      //alert(data);
+      console.log(data);      
+      var unit_all = JSON.parse(data);  
+      console.log(unit_all[0]);
+      document.getElementById("unit_name").innerHTML = unit_all[0];
+      document.getElementById("unit_code").innerHTML = unit_all[1];
+      document.getElementById("unit_description").innerHTML = unit_all[2];
+      document.getElementById("uc_name").innerHTML = unit_all[3];      
+      
+    }
+
+  });
+});
+
+
+

@@ -14,7 +14,7 @@
       else
       {
         //$user_check_query = "SELECT * FROM staff WHERE email='$email'  LIMIT 1";
-        $user_check_query = "SELECT * FROM staff S JOIN appoint_staff A WHERE S.id=A.staff_id AND S.email='$email'  LIMIT 1";
+        $user_check_query = "SELECT s.email, s.type, s.name, s.staff_id, s.password, A.position  FROM staff s JOIN appoint_staff A WHERE s.id=A.staff_id AND s.email='$email' LIMIT 1";
         
 
       } 

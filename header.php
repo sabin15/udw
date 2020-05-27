@@ -63,7 +63,8 @@
                             echo '</ul>';
                             echo '</li>';
                             echo '<li><a href="manage-timetable.php">Manage Timetable</a></li>';
-                            echo '<li><a href="enrolled_students.php">Students</a></li>';
+                            echo '<li><a href="edit_student.php">Manage Students</a></li>';
+                            //echo '<li><a href="enrolled_students.php">Students</a></li>';
                             echo '<li><a href="edit_staff.php">Staff</a></li>';  
                         }
                      ?>
@@ -78,14 +79,15 @@
                             echo '</ul>';
                             echo '</li>';
                             echo '<li><a href="manage-timetable.php">Manage Timetable</a></li>';
-                            echo '<li><a href="enrolled_students.php">Students</a></li>';
+                            echo '<li><a href="edit_student.php">Manage Students</a></li>';
+                            //echo '<li><a href="enrolled_students.php">Students</a></li>';
                             echo '<li><a href="edit_staff.php">Staff</a></li>';                           
                             
                         }
                      ?>
 
                     <?php
-                        if(isset($_SESSION['logged']) && $_SESSION['logged'] && ($_SESSION['type']=='lecturer' || $_SESSION['type']=='tutor')){
+                        if(isset($_SESSION['logged']) && $_SESSION['logged'] && $_SESSION['type']=='lecturer'){
                             echo '<li class="dropdown">';
                             echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Management';
                             echo '<span class="caret"></span></a>';
@@ -93,6 +95,20 @@
                             echo '</ul>';
                             echo '</li>';
                             echo '<li><a href="edit_staff.php">Staff</a></li>';
+                            echo '<li><a href="edit_student.php">Manage Students</a></li>';
+                        //echo '<li><a href="enrolled_students.php">Students</a></li>';  
+                            
+                        }
+                     ?>
+                     <?php
+                        if(isset($_SESSION['logged']) && $_SESSION['logged'] && $_SESSION['type']=='tutor'){
+                            echo '<li class="dropdown">';
+                            echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Management';
+                            echo '<span class="caret"></span></a>';
+                            echo '<ul class="dropdown-menu">';                    
+                            echo '</ul>';
+                            echo '</li>';
+                            echo '<li><a href="edit_staff.php">Staff</a></li>';            
                             echo '<li><a href="enrolled_students.php">Students</a></li>';  
                             
                         }
