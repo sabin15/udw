@@ -431,3 +431,8 @@ function addTutortoUnit(){
 }
 
 
+
+
+function reserve_totorial_lecture(){
+  alert("reached");
+}

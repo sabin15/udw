@@ -13,30 +13,33 @@
         $end_date=mysqli_escape_string($conn,$_POST['sem-end-date']);
         $start_time=mysqli_escape_string($conn,$_POST['sem-start-time']);
         $end_time=mysqli_escape_string($conn,$_POST['sem-end-time']);
-        $day_initial = "";
+        $value = "";
         if(isset($_POST['day1'])){
-            $day_initial = $day_initial . $_POST['day1'] . ".";
+            $day1 = $_POST['day1'];
+            $value=$value."('".$unit."', '".$campus."', '".$semester."', '".$type."', '".$start_date."','".$end_date."','".$start_time."','".$end_time."', '".$day1."'),";
         }
         if(isset($_POST['day2'])){
-            $day_initial = $day_initial . $_POST['day2'] . ".";
+            $day2 = $_POST['day2'];
+            $value=$value."('".$unit."', '".$campus."', '".$semester."', '".$type."', '".$start_date."','".$end_date."','".$start_time."','".$end_time."', '".$day2."'),";
         }
         if(isset($_POST['day3'])){
-            $day_initial = $day_initial . $_POST['day3'] . ".";
+            $day3 = $_POST['day3'];
+            $value=$value."('".$unit."', '".$campus."', '".$semester."', '".$type."', '".$start_date."','".$end_date."','".$start_time."','".$end_time."', '".$day3."'),";
         }
         if(isset($_POST['day4'])){
-            $day_initial = $day_initial . $_POST['day4'] . ".";
+            $day4 = $_POST['day4'];
+            $value=$value."('".$unit."', '".$campus."', '".$semester."', '".$type."', '".$start_date."','".$end_date."','".$start_time."','".$end_time."', '".$day4."'),";
         }
         if(isset($_POST['day5'])){
-            $day_initial = $day_initial . $_POST['day5'];
+            $day5 =$_POST['day5'];
+            $value=$value."('".$unit."', '".$campus."', '".$semester."', '".$type."', '".$start_date."','".$end_date."','".$start_time."','".$end_time."', '".$day5."'),";
         }
 
+        $value = substr_replace($value ,"",-1);
 
 
-        $dayy=mysqli_escape_string($conn,$day_initial);
-        //echo $type.$sem_start_date.$sem_end_date.$sem_start_time.$sem_end_time.$day;
-       
-        //$sql="INSERT INTO timetable(unit, campus, semester, type, start_date, end_date, start_time, end_time, day) VALUES('$unit', '$campus', '$semester' ,'$type', '$sem_start_date', '$sem_end_date', '$sem_start_time', '$sem_end_time',  $day')";
-        $sql="INSERT INTO timetable(unit, campus, semester, type, start_date, end_date, start_time, end_time, day) VALUES('$unit', '$campus', '$semester', '$type', '$start_date','$end_date','$start_time','$end_time', '$dayy')";
+
+        $sql="INSERT INTO timetable(unit, campus, semester, type, start_date, end_date, start_time, end_time, day) VALUES ".$value;
         $result=mysqli_query($conn,$sql);
         if($result){
             echo true;
